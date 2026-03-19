@@ -69,6 +69,7 @@ module.exports = {
         deca: ['Lexend Deca', 'Inter', 'sans-serif'],
         app: ['Homemade Apple', 'cursive'],
         out: ['Outfit', 'Inter', 'sans-serif'],
+        console: ['Share Tech Mono', 'monospace'],
       },
     },
   },

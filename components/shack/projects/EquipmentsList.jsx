@@ -180,35 +180,22 @@ const EquipmentsList = () => {
     },
   ];
 
-  const { systemTheme, theme, setTheme } = useTheme();
-  const [cardBackground, setCardBackground] = useState("display-none");
   const [load, setLoad] = useState(false);
-  useEffect(() => {
-    if (theme === "light") {
-      {
-        setCardBackground(
-          "bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] bg-gradient-to-bl from-orange-400  to-yellow-300 text-black"
-        );
-        setLoad(true);
-      }
-    }
-    if (theme === "dark") {
-      setCardBackground(
-        "bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-fuchsia-900 to-stone-900 text-white"
-      );
-      setLoad(true);
-    }
-  }, [theme]);
+  useEffect(() => setLoad(true), []);
+  const cardBackground = "shack-card";
   return (
     <div>
       {load && (
-        <ul className="columns-1 md:columns-3 gap-8 list-none">
+        <div className="flex flex-wrap justify-center gap-5 md:gap-6">
           {data.map((ele, id) => (
-            <li className="mb-5" key={id}>
-              {<EquipmentsCard data={ele} cardBackground={cardBackground} />}
-            </li>
+            <div
+              key={id}
+              className="w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.67rem)] xl:w-[calc(25%-1.125rem)] max-w-md"
+            >
+              <EquipmentsCard data={ele} cardBackground={cardBackground} />
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

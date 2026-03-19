@@ -1,5 +1,4 @@
 import Image from "next/image";
-import XLX from "../public/XLX.png";
 import mmdvm from "../public/mmdvm.jpg";
 import Link from "next/link";
 
@@ -25,39 +24,39 @@ const ProjectCard = () => {
   ];
 
   return (
-    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+    <div className="flex flex-wrap justify-center gap-5 md:gap-6">
       {data.map((project) => {
         return (
-          <div
-            className="rounded-lg mb-12 flex flex-col items-center"
+          <Link
+            href={project.link}
+            target={project.target}
             key={project.id}
+            onClick={() => {
+              project.title === "Portfolio"
+                ? alert("You are already on this site! 🤩")
+                : "";
+            }}
+            className="landing-panel flex flex-col overflow-hidden max-w-md w-full sm:w-[calc(50%-0.625rem)] md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-0.67rem)] cursor-pointer hover:border-amber-500/40 dark:hover:border-[#39ff14]/40 hover:shadow-lg dark:hover:shadow-[0_0_16px_rgba(57,255,20,0.12)] transition-all duration-300"
           >
-            <Link
-              href={project.link}
-              target={project.target}
-              onClick={() => {
-                project.title === "Portfolio"
-                  ? alert("You are already on this site! 🤩")
-                  : "";
-              }}
-            >
+            <div className="relative w-full aspect-video overflow-hidden">
               <Image
                 loading="lazy"
                 src={project.image}
                 alt={project.title}
-                width="200"
-                className="rounded-md drop-shadow-2xl hover:scale-110"
+                fill
+                className="object-cover transition-transform duration-300 hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
-            </Link>
-            <div className="flex flex-col items-center">
-              <h1 className="font-semibold text-[1.5rem] mt-3 text-gray-700 dark:text-white">
+            </div>
+            <div className="p-4 sm:p-5 flex flex-col">
+              <h2 className="landing-h2 text-lg md:text-xl mb-2">
                 {project.title}
-              </h1>
-              <p className="max-w-[90%] text-gray-400 font-light text-center">
+              </h2>
+              <p className="landing-body text-sm sm:text-base text-justify w-full">
                 {project.description}
               </p>
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>

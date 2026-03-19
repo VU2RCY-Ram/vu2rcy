@@ -9,7 +9,7 @@ const Header = () => {
   const { systemTheme, theme, setTheme } = useTheme();
   const router = useRouter().asPath;
   const [mounted, setMounted] = useState(false);
-  let Links = [
+  const Links = [
     { name: "Work", link: "/work" },
     { name: "Shack", link: "/shack" },
     { name: "Homebrew", link: "/homebrew" },
@@ -17,150 +17,161 @@ const Header = () => {
     { name: "About", link: "/about" },
   ];
   const [isScrolled, setIsScrolled] = useState(false);
-  let [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const touchRef = useRef();
-  const clickHandler = (link) => {
-    if (router != link) {
-      setTimeout(() => {
-        setOpen(false);
-      }, 700);
-    }
+
+  const clickHandler = () => {
+    setTimeout(() => setOpen(false), 400);
   };
-  const useOutsideAlerter = (ref) => {
-    useEffect(() => {
-      /**
-       * Alert if clicked on outside of element
-       */
-      function handleClickOutside(event) {
-        if (ref.current && !ref.current.contains(event.target)) {
-          setOpen(false);
-        }
-      }
-      // Bind the event listener
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        // Unbind the event listener on clean up
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [ref]);
-  };
-  useOutsideAlerter(touchRef);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 70) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
+    const handleClickOutside = (event) => {
+      if (touchRef.current && !touchRef.current.contains(event.target)) {
+        setOpen(false);
       }
     };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 70);
     setMounted(true);
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   if (!mounted) return null;
   const currentTheme = theme === "system" ? systemTheme : theme;
+
   return (
     <nav
-      style={{
-        backdropFilter: "blur(2px)",
-        marginTop: "-1.25rem",
-      }}
-      className="top-0 sticky  pt-5 z-50"
+      className="top-0 sticky pt-5 z-50 -mt-5"
+      style={{ backdropFilter: "blur(4px)" }}
     >
       <div
         ref={touchRef}
-        className={`${
-          isScrolled &&
-          "bg-opacity-[0.7] shadow-md drop-shadow-lg backdrop-blur-3xl "
-        } font-medium duration-500 bg-opacity-90 transition-all linear z-40 dark:text-white w-[90%] sm:w-[75%] md:w-[90%] lg:w-[70%] xl:w-[60%] max-w-6xl mx-auto  bg-white dark:bg-[#353535] drop-shadow-xs backdrop-blur-3xl top-4 sticky rounded-2xl `}
+        className={`
+          relative mx-auto w-[92%] sm:w-[80%] md:w-[85%] lg:w-[72%] xl:w-[62%] max-w-5xl
+          font-console z-40 transition-all duration-500 ease-out
+          ${isScrolled ? "nav-console-scrolled" : "nav-console"}
+        `}
       >
-        <div className="flex justify-between md:space-x-10 lg:space-x-12 xl:space-x-16 md:flex items-center place-items-center md:justify-center py-3 md:px-10 px-8">
-          <div className="select-none order-2 md:order-1 cursor-pointer flex items-center text-gray-800">
-            <Link href={"/"} className="">
-              <div
-                style={{
-                  background:
-                    "linear-gradient(to right, #14b8a6 10%, #a855f7 45%, #f97316 100%)",
-                  fontSize: "30px",
-                  WebkitBackgroundClip: "text",
-                  color: "transparent",
-                  backgroundSize: "400%",
-                  animation: "gradient 8s linear infinite alternate",
-                  letterSpacing: "2px",
-                  wordSpacing: "0px",
-                  fontWeight: "bold",
-                }}
-              >
-                VU2RCY
-              </div>
-            </Link>
-          </div>
-          {currentTheme === "dark" ? (
-            <button
-              onClick={() => {
-                setTheme("light");
-              }}
-              className="w-max md:order-8 fill-purple-600 "
-            >
-              <MdLightMode className="w-5 h-5 lg:w-6 lg:h-6 fill-white " />
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                setTheme("dark");
-              }}
-              className="w-max md:order-8 fill-purple-600 "
-            >
-              <MdDarkMode className="w-5 h-5 lg:w-6 lg:h-6 fill-black " />
-            </button>
-          )}
+        {/* Subtle frequency grid overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none rounded-xl opacity-[0.03] dark:opacity-[0.06]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, currentColor 1px, transparent 1px),
+              linear-gradient(to bottom, currentColor 1px, transparent 1px)
+            `,
+            backgroundSize: "24px 24px",
+          }}
+          aria-hidden
+        />
 
-          <div
+        <div className="relative flex flex-wrap justify-between md:justify-center md:gap-x-4 lg:gap-x-8 items-center py-3 px-5 md:px-6">
+          {/* Logo / Call sign */}
+          <Link
+            href="/"
+            className="order-2 md:order-1 flex items-center group min-w-0"
+          >
+            <span className="nav-callsign font-console tracking-[0.25em] text-xl sm:text-2xl font-semibold">
+              VU2RCY
+            </span>
+          </Link>
+
+          {/* Theme toggle - LED indicator style */}
+          <button
+            onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+            className="order-1 md:order-3 flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-300 hover:scale-110 nav-theme-btn"
+            aria-label={`Switch to ${currentTheme === "dark" ? "light" : "dark"} mode`}
+          >
+            {currentTheme === "dark" ? (
+              <MdLightMode className="w-5 h-5 md:w-6 md:h-6 text-amber-400" />
+            ) : (
+              <MdDarkMode className="w-5 h-5 md:w-6 md:h-6 text-slate-700" />
+            )}
+          </button>
+
+          {/* Mobile menu button - radio dial style */}
+          <button
             onClick={() => setOpen(!open)}
-            className="transition-all duration-500 ease-in order-3 text-lg flex flex-col space-y-[0.2rem]  cursor-pointer items-center font-semibold md:hidden"
+            className="order-3 md:hidden flex flex-col justify-center items-center w-11 h-11 rounded-lg nav-hamburger"
+            aria-expanded={open}
+            aria-label="Toggle menu"
           >
-            <div
-              className={` ${
-                open && "rotate-45 translate-y-[5px] "
-              } relative rounded-xl origin-center transition-all duration-500 ease-in w-4 h-[0.1125rem] dark:bg-white/70 dark:text-white/70 fill-black text-black bg-black`}
-            ></div>
-            <div
-              className={` ${
-                open && "opacity-0 translate-x-20"
-              } relative rounded-xl origin-center transition-all duration-1000 ease-in-out w-4 h-[0.1rem] dark:bg-white/70 dark:text-white/70 fill-black text-black bg-black `}
-            ></div>
-            <div
-              className={` ${
-                open && "-rotate-45 -translate-y-[5px]"
-              } relative rounded-xl origin-center transition-all duration-500 ease-in w-4 h-[0.1125rem] dark:bg-white/70 dark:text-white/70 fill-black text-black bg-black`}
-            ></div>
-          </div>
-          <ul
-            className={` rounded-3xl md:rounded-none dark:bg-[#353535] bg-white  py-4 md:py-0 md:bg-inherit font-semibold order-4 md:flex md:items-center md:pb-0 pb-8 absolute md:static bg-light-blue md:bg-none md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 lg:transition-none transition-all duration-500 ease-in ${
-              open ? "top-[3.5rem]" : "top-[-490px]"
-            }`}
-          >
-            {Links.map((link) => (
-              <li
-                key={link.name}
-                className="md:ml-8 text-base lg:text-lg md:my-0 my-7"
-              >
-                <Link
-                  href={link.link}
-                  onClick={() => clickHandler(`${link.name}`)}
-                  className={`${
-                    router.includes(link.link)
-                      ? " text-purple-400 font-semibold "
-                      : " text-gray-700 dark:text-white "
-                  } hover:text-purple-500 dark:hover:text-purple-500 duration-500`}
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
+            <span
+              className={`block w-5 h-0.5 rounded-full transition-all duration-300 ${
+                open ? "rotate-45 translate-y-1.5" : ""
+              }`}
+            />
+            <span
+              className={`block w-5 h-0.5 rounded-full mt-1 transition-all duration-300 ${
+                open ? "opacity-0 scale-0" : ""
+              }`}
+            />
+            <span
+              className={`block w-5 h-0.5 rounded-full mt-1 transition-all duration-300 ${
+                open ? "-rotate-45 -translate-y-1.5" : ""
+              }`}
+            />
+          </button>
+
+          {/* Desktop nav links */}
+          <ul className="hidden md:flex order-2 md:flex-row md:items-center gap-1 lg:gap-2">
+            {Links.map((link) => {
+              const isActive = router === link.link || (link.link !== "/" && router.startsWith(link.link));
+              return (
+                <li key={link.name}>
+                  <Link
+                    href={link.link}
+                    className={`
+                      relative px-4 py-2 rounded-md text-sm font-medium tracking-wide
+                      transition-all duration-300
+                      ${isActive ? "nav-link-active" : "nav-link"}
+                    `}
+                  >
+                    {isActive && (
+                      <span
+                        className="absolute inset-0 rounded-md nav-link-glow"
+                        aria-hidden
+                      />
+                    )}
+                    <span className="relative">{link.name}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        {/* Mobile nav panel - slide down like a spectrum display */}
+        <div
+          className={`
+            md:hidden overflow-hidden transition-all duration-300 ease-out
+            ${open ? "max-h-80 opacity-100" : "max-h-0 opacity-0"}
+          `}
+        >
+          <ul className="nav-mobile-panel flex flex-col py-4 px-5 gap-1 border-t border-white/10 dark:border-amber-500/20">
+            {Links.map((link) => {
+              const isActive = router === link.link || (link.link !== "/" && router.startsWith(link.link));
+              return (
+                <li key={link.name}>
+                  <Link
+                    href={link.link}
+                    onClick={clickHandler}
+                    className={`
+                      block py-3 px-4 rounded-lg text-sm font-medium tracking-wide
+                      transition-colors duration-200
+                      ${isActive ? "nav-mobile-active" : "nav-mobile-link"}
+                    `}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>

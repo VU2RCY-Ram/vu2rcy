@@ -114,6 +114,231 @@ html {
     background: linear-gradient(120deg, #14b8a6 10%, #a855f7 45%, #f97316 100%);
   }
 
+  /* Navbar — radio console aesthetics */
+  @keyframes nav-pulse {
+    0%, 100% { box-shadow: 0 0 12px rgba(57, 255, 20, 0.15); }
+    50% { box-shadow: 0 0 20px rgba(57, 255, 20, 0.25); }
+  }
+  @keyframes scanline {
+    0% { transform: translateY(-100%); opacity: 0.03; }
+    100% { transform: translateY(100vh); opacity: 0.06; }
+  }
+  .nav-console-glow {
+    animation: nav-pulse 3s ease-in-out infinite;
+  }
+  .nav-scanline::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(57, 255, 20, 0.03) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    animation: scanline 8s linear infinite;
+  }
+
+  /* Nav console panel — deep blacks, phosphor accents */
+  .nav-console {
+    @apply rounded-xl border;
+    background: rgba(10, 10, 18, 0.85);
+    border-color: rgba(57, 255, 20, 0.2);
+    box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.08), 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+  .dark .nav-console,
+  .dark .nav-console {
+    background: rgba(8, 8, 14, 0.92);
+    border-color: rgba(57, 255, 20, 0.25);
+  }
+  .nav-console-scrolled {
+    @apply rounded-xl border;
+    background: rgba(10, 10, 18, 0.95);
+    border-color: rgba(57, 255, 20, 0.35);
+    box-shadow: 0 0 12px rgba(57, 255, 20, 0.08), 0 4px 24px rgba(0, 0, 0, 0.5);
+  }
+  .dark .nav-console-scrolled {
+    background: rgba(6, 6, 12, 0.96);
+  }
+  /* Light mode overrides */
+  :root:not(.dark) .nav-console {
+    background: rgba(248, 250, 252, 0.9);
+    border-color: rgba(0, 82, 102, 0.2);
+  }
+  :root:not(.dark) .nav-console-scrolled {
+    background: rgba(241, 245, 249, 0.95);
+    border-color: rgba(0, 82, 102, 0.25);
+  }
+
+  .nav-callsign {
+    color: #39ff14;
+    text-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+  }
+  .nav-callsign:hover {
+    color: #00ff41;
+    text-shadow: 0 0 24px rgba(57, 255, 20, 0.6);
+  }
+  :root:not(.dark) .nav-callsign {
+    color: #0d9488;
+    text-shadow: none;
+  }
+  :root:not(.dark) .nav-callsign:hover {
+    color: #0f766e;
+  }
+
+  .nav-theme-btn {
+    @apply text-amber-400;
+  }
+  .dark .nav-theme-btn {
+    @apply text-amber-400;
+  }
+  :root:not(.dark) .nav-theme-btn {
+    @apply text-slate-700;
+  }
+
+  .nav-hamburger span {
+    @apply bg-amber-500;
+  }
+  .dark .nav-hamburger span {
+    @apply bg-amber-400;
+  }
+  :root:not(.dark) .nav-hamburger span {
+    @apply bg-slate-600;
+  }
+
+  .nav-link {
+    @apply text-slate-400;
+  }
+  .nav-link:hover {
+    @apply text-amber-400;
+    text-shadow: 0 0 8px rgba(255, 176, 0, 0.3);
+  }
+  .dark .nav-link {
+    @apply text-slate-300;
+  }
+  .dark .nav-link:hover {
+    @apply text-amber-400;
+  }
+  :root:not(.dark) .nav-link {
+    @apply text-slate-600;
+  }
+  :root:not(.dark) .nav-link:hover {
+    @apply text-teal-700;
+  }
+
+  .nav-link-active {
+    @apply text-amber-400 font-semibold;
+    text-shadow: 0 0 12px rgba(255, 176, 0, 0.35);
+  }
+  .dark .nav-link-active {
+    @apply text-amber-400;
+  }
+  :root:not(.dark) .nav-link-active {
+    @apply text-teal-700;
+    text-shadow: none;
+  }
+
+  .nav-link-glow {
+    background: rgba(57, 255, 20, 0.1);
+    box-shadow: 0 0 12px rgba(57, 255, 20, 0.15);
+  }
+  :root:not(.dark) .nav-link-glow {
+    background: rgba(13, 148, 136, 0.12);
+    box-shadow: none;
+  }
+
+  .nav-mobile-panel {
+    @apply bg-slate-900/95;
+    background: rgba(8, 8, 14, 0.98);
+  }
+  .dark .nav-mobile-panel {
+    background: rgba(6, 6, 12, 0.98);
+  }
+  :root:not(.dark) .nav-mobile-panel {
+    background: rgba(248, 250, 252, 0.98);
+  }
+
+  .nav-mobile-link {
+    @apply text-slate-300;
+  }
+  .nav-mobile-link:hover {
+    @apply text-amber-400 bg-amber-500/10;
+  }
+  .dark .nav-mobile-link {
+    @apply text-slate-300;
+  }
+  .dark .nav-mobile-link:hover {
+    @apply text-amber-400;
+    background: rgba(255, 176, 0, 0.08);
+  }
+  :root:not(.dark) .nav-mobile-link {
+    @apply text-slate-600;
+  }
+  :root:not(.dark) .nav-mobile-link:hover {
+    @apply text-teal-800;
+    background: rgba(13, 148, 136, 0.1);
+  }
+
+  .nav-mobile-active {
+    @apply text-amber-400 font-semibold;
+    background: rgba(57, 255, 20, 0.08);
+  }
+  .dark .nav-mobile-active {
+    @apply text-amber-400;
+    background: rgba(255, 176, 0, 0.1);
+  }
+  :root:not(.dark) .nav-mobile-active {
+    @apply text-teal-800;
+    background: rgba(13, 148, 136, 0.12);
+  }
+
+  /* Landing page panels — radio console aesthetic */
+  .landing-panel {
+    @apply rounded-2xl border;
+    background: rgba(248, 250, 252, 0.85);
+    border-color: rgba(0, 82, 102, 0.15);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 82, 102, 0.06);
+  }
+  .dark .landing-panel {
+    background: rgba(10, 10, 18, 0.9);
+    border-color: rgba(57, 255, 20, 0.2);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(57, 255, 20, 0.08);
+  }
+
+  .landing-link {
+    @apply transition-colors duration-300;
+  }
+
+  /* Landing typography hierarchy — console for headings, Outfit for body */
+  .landing-h1 {
+    @apply font-console tracking-[0.2em] font-semibold text-slate-700 dark:text-slate-200 text-lg sm:text-xl md:text-2xl lg:text-3xl;
+  }
+  .landing-h2 {
+    @apply font-console tracking-[0.12em] font-semibold text-slate-700 dark:text-amber-400/90 text-base sm:text-lg md:text-xl;
+  }
+  .landing-subtitle {
+    @apply font-console tracking-[0.15em] text-sm sm:text-base md:text-lg text-slate-500 dark:text-amber-400/90;
+  }
+  .landing-body {
+    @apply font-out text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base md:text-lg text-justify;
+  }
+
+  /* Shack equipment cards — theme-aligned */
+  .shack-card {
+    @apply rounded-xl border overflow-hidden;
+    background: rgba(248, 250, 252, 0.9);
+    border-color: rgba(0, 82, 102, 0.2);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  }
+  .dark .shack-card {
+    background: rgba(10, 10, 18, 0.92);
+    border-color: rgba(57, 255, 20, 0.25);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(57, 255, 20, 0.08);
+  }
+  .shack-card .MuiTypography-root {
+    @apply text-slate-600 dark:text-slate-300;
+  }
+  .shack-card .MuiTypography-h5 {
+    @apply font-console text-slate-700 dark:text-slate-200 tracking-wide;
+  }
+
   .land::before {
     content: "";
     position: absolute;

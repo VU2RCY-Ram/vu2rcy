@@ -1,11 +1,10 @@
 import Head from "next/head";
-import { useTheme } from "next-themes";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import Image from "next/image";
-import shackImage from "public/vu2rcyShack.jpg";
+import shackImage from "../../public/vu2rcyShack.jpg";
+
 export default function Index() {
-  const { systemTheme, theme, setTheme } = useTheme();
   const router = useRouter();
   const shackEquipmentData = [
     {
@@ -57,43 +56,35 @@ export default function Index() {
       link: "digitalMode",
     },
   ];
-  const [shackEquipment, SetShackEquipment] = useState([]);
+  const [shackEquipment, setShackEquipment] = useState([]);
   useEffect(() => {
-    SetShackEquipment(shackEquipmentData);
-  }, [theme]);
+    setShackEquipment(shackEquipmentData);
+  }, []);
 
   return (
-    <div className="px-1 sm:px-2 md:px-3 lg:mb-2 lg:px-3 mx-auto max-w-[90%]">
+    <div className="px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 max-w-[75rem] mx-auto">
       <Head>
-        <title>shack - VU2RCY </title>
+        <title>Shack - VU2RCY</title>
         <link rel="icon" href="./logo.png" />
       </Head>
-      <main className="max-w-screen">
-        <div className=" pt-24 container mx-auto p-4">
-          <h1 className="text-center selection:text-black/40 dark:selection:text-white/40 font-deca bg-gradient-to-tr from-purple-200 via-purple-400 to-purple-800 bg-clip-text text-transparent items-center mx-auto text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold">
+      <main>
+        <div className="pt-16 sm:pt-20 md:pt-24 container mx-auto p-4">
+          <h1 className="landing-h1 text-center text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-8">
             Shack Equipment
           </h1>
-          <div className="mt-8 flex flex-wrap justify-center">
+          <div className="flex flex-wrap justify-center gap-5 md:gap-6">
             {shackEquipment.map((equipment, index) => (
               <div
                 key={index}
-                className={`cursor-pointer duration-100 hover:shadow-2xl mb-4 drop-shadow-xl flex flex-col md:flex-row space-y-4 md:space-y-0 mx-6 md:mx-4 lg:mx-4 w-full sm:w-full md:w-6/12 lg:w-5/12 rounded-[1.4rem] p-4 ${
-                  theme !== "light"
-                    ? "bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-gray-900 via-purple-900 to-violet-600"
-                    : "bg-gradient-to-bl from-pink-200 via-indigo-300 to-purple-200"
-                }`}
-                onClick={() => {
-                  router.push(`shack/${equipment.link}`);
-                }}
+                onClick={() => router.push(`shack/${equipment.link}`)}
+                className="landing-panel cursor-pointer hover:border-amber-500/40 dark:hover:border-[#39ff14]/40 hover:shadow-lg dark:hover:shadow-[0_0_16px_rgba(57,255,20,0.12)] transition-all duration-300 flex flex-col w-full sm:w-[calc(50%-0.625rem)] md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] max-w-md p-5 sm:p-6"
               >
-                <article>
-                  <h2 className="mx-auto text-center font-deca font-bold text-2xl dark:text-purple-500 text-white">
-                    {equipment.name}
-                  </h2>
-                  <p className="font-normal sm:text-[0.95rem] md:text-base text-justify">
-                    {equipment.description}
-                  </p>
-                </article>
+                <h2 className="landing-h2 text-lg md:text-xl mb-3">
+                  {equipment.name}
+                </h2>
+                <p className="landing-body text-sm sm:text-base text-justify w-full">
+                  {equipment.description}
+                </p>
               </div>
             ))}
           </div>
@@ -101,9 +92,13 @@ export default function Index() {
             target="_blank"
             href="./vu2rcyShack.jpg"
             rel="noopener noreferrer"
-            className="cursor-pointer"
+            className="cursor-pointer block mt-12"
           >
-            <Image src={shackImage} alt="shack photo" className="rounded" />
+            <Image
+              src={shackImage}
+              alt="VU2RCY Shack"
+              className="rounded-xl w-full max-w-4xl mx-auto border border-slate-300/30 dark:border-[#39ff14]/20"
+            />
           </a>
         </div>
       </main>

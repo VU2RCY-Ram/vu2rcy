@@ -17,7 +17,7 @@ const AccordionItem = ({ data, active, setActive, id, imageUrl, toUrl }) => {
 
   return (
     <div
-      className="border border-purple-700 bg-[#10041438] rounded-md mb-4 shadow-2xl transition-all duration-300 ease-out"
+      className="landing-panel mb-4 shadow-lg transition-all duration-300 ease-out hover:shadow-[0_0_16px_rgba(57,255,20,0.15)] dark:hover:shadow-[0_0_16px_rgba(57,255,20,0.2)]"
       onClick={() => {
         if (toUrl !== "") {
           router.push(toUrl);
@@ -29,12 +29,12 @@ const AccordionItem = ({ data, active, setActive, id, imageUrl, toUrl }) => {
           toUrl !== "" ? "cursor-pointer" : ""
         } transition-all duration-300 ease-out`}
       >
-        <h2 className="font-medium text-lg transition-colors duration-900 ease-out ">
+        <h2 className="landing-h2 font-medium text-lg transition-colors duration-300 ease-out">
           {data.title}
         </h2>
 
         <span
-          className="duration-300 border-purple-700 border p-3 rounded-3xl shadow-2xl cursor-pointer "
+          className="duration-300 border border-slate-300 dark:border-[#39ff14]/40 p-2 rounded-lg cursor-pointer text-amber-600 dark:text-[#39ff14] hover:bg-amber-500/10 dark:hover:bg-[#39ff14]/10 transition-colors"
           onClick={(e) => {
             toggleAccordion();
             e.stopPropagation();
@@ -50,7 +50,7 @@ const AccordionItem = ({ data, active, setActive, id, imageUrl, toUrl }) => {
   ${isOpen ? "max-h-[5000px]" : "max-h-0"}
   `}
       >
-        <div className="p-4 pb-5 border-t border-purple-700 ">
+        <div className="p-4 pb-5 border-t border-slate-200 dark:border-[#39ff14]/25">
           <div className="flex flex-col md:flex-row justify-center">
             {imageUrl !== "" && (
               <div className="md:w-1/2 rounded-sm p-2">
@@ -62,7 +62,7 @@ const AccordionItem = ({ data, active, setActive, id, imageUrl, toUrl }) => {
               </div>
             )}
 
-            <div className="md:w-1/2 p-2 text-justify">{data.description}</div>
+            <div className="md:w-1/2 p-2 landing-body">{data.description}</div>
           </div>
         </div>
       </div>

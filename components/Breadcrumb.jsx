@@ -25,7 +25,7 @@ function Breadcrumb({ data }) {
             {id > 0 && <span className="mx-1 ">&gt;</span>}
             <Link
               href={ele.link}
-              className="capitalize  hover:underline font-bold"
+              className="capitalize font-medium text-slate-600 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors duration-300"
             >
               {ele.name}
             </Link>

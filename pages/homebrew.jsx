@@ -1,13 +1,10 @@
-import TechCard from "@/components/TechCard";
 import Head from "next/head";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   HiOutlineArrowLongLeft,
   HiOutlineArrowLongRight,
 } from "react-icons/hi2";
-import Box from "@mui/material/Box";
-
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 
@@ -19,8 +16,6 @@ export default function Tech() {
       main: "/homebrew/CwKey.jpg",
       desc: "The original digital mode, using on/off keying of a continuous wave carrier for communication.",
       tag: "Morse Code",
-      bg: "bg-blue-50",
-      text: "text-blue-500",
     },
     // {
     //   title: "Continuous Wave (CW)",
@@ -106,89 +101,100 @@ export default function Tech() {
     }
   };
 
-  useEffect(() => {
-    console.clear();
-  }, []);
-
   return (
-    <div className="min-h-[75vh] md:min-h-[73vh] px-10 sm:px-20 md:px-32 lg:mb-12 lg:px-60 xl:px-80 mx-auto">
+    <div className="min-h-[75vh] md:min-h-[73vh] max-w-[75rem] px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 mx-auto lg:mb-12">
       <Head>
         <title>VU2RCY - Homebrew </title>
         <link rel="icon" href="./logo.png" />
       </Head>
       <main className="max-w-screen max-w-5xl mx-auto">
         <div className="pt-24 flex flex-col mx-auto">
-          <h1 className="bg-gradient-to-br dark:selection:text-white/80 selection:text-black/70 to-yellow-200 from-red-500 bg-clip-text text-transparent items-center mx-auto text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-deca font-bold ">
+          <h1 className="landing-h1 items-center mx-auto text-center">
             Ham Radio
           </h1>
-          <p className="mt-8 font-normal lg:text-lg text-center md:w-[70%] mx-auto text-base md:text-[1.15rem] ">
+          <p className="landing-body mt-8 text-center md:w-[70%] mx-auto w-full">
             Embracing the world of ham radio, exploring frequencies, and
             connecting with fellow enthusiasts is a thrilling journey 📻🌐
           </p>
         </div>
         <div className="flex mx-auto justify-between mt-12 space-x-4 md:space-x-6 lg:space-x-auto items-center">
           <button
-            className="font-space group bg-[#c7dada] dark:bg-[#939f9f] dark:hover:bg-[#828686] h-max w-max hover:bg-[#f7eeff]  px-1 py-1 rounded-full select-none hidden md:block"
+            className="font-console group bg-slate-100 dark:bg-slate-800/80 hover:bg-amber-100 dark:hover:bg-[#39ff14]/10 border border-slate-200 dark:border-[#39ff14]/20 h-max w-max px-2 py-1.5 rounded-lg select-none hidden md:block transition-colors duration-300"
             onClick={leftArrow}
           >
-            <HiOutlineArrowLongLeft className=" w-5 h-3 sm:w-6 sm:h-4 md:w-8 md:h-5 lg:w-10 lg:h-6 stroke-[3] group-hover:fill-[#00bdbd]" />
+            <HiOutlineArrowLongLeft className="w-5 h-3 sm:w-6 sm:h-4 md:w-8 md:h-5 lg:w-10 lg:h-6 stroke-[3] text-amber-600 dark:text-[#39ff14] group-hover:text-amber-700 dark:group-hover:text-[#00ff41]" />
           </button>
-          <div className="bg-gradient-to-tr from-[#ff8080] via-[#ff6b9e] to-[#cc66cc] dark:from-[#dbfefe25] dark:via-[#f9f2ff10] dark:to-[#fff2ec20] flex p-2 py-2 sm:p-3 md:p-4 lg:p-6 rounded-xl sm:rounded-[0.8rem] md:rounded-[1.2rem] lg:rounded-[1.6rem] mx-auto items-center justify-center space-x-2 sm:space-x-3 md:space-x-4 h-24 md:h-max lg:space-x-6 transition-all duration-700 ease-linear">
+          <div className="landing-panel flex p-2 py-2 sm:p-3 md:p-4 lg:p-6 mx-auto items-center justify-center space-x-2 sm:space-x-3 md:space-x-4 h-24 md:h-max lg:space-x-6 transition-all duration-500 ease-out">
             <div className="basis-[30%] lg:basis-[25%] h-16 w-12 sm:h-20 sm:w-20 md:h-28 md:w-28 lg:h-32 lg:w-32 rounded-2xl hidden md:block ">
               <div className=" mx-auto rounded-2xl relative w-full h-full bg-[transparent]">
                 <Image
                   src={data[idNumber].main}
-                  alt="ham radio"
+                  alt={data[idNumber].title}
                   fill
                   placeholder="empty"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className=" select-none p-1 sm:p-2 md:p-3 lg:p-4 h-full w-full flex mx-auto object-contain rounded-2xl hidden md:block"
+                  className="select-none p-1 sm:p-2 md:p-3 lg:p-4 h-full w-full object-contain rounded-2xl hidden md:block"
                 />
               </div>
             </div>
-            <div className=" basis-[70%] lg:basis-[75%] mx-auto transition-all duration-500 ">
-              <div className="flex mb-1 justify-between items-center ">
-                <h3 className="text-[0.7rem] sm:text-sm md:text-base lg:text-xl font-semibold font-deca tracking-wide ">
+            <div className="basis-[70%] lg:basis-[75%] mx-auto transition-all duration-500">
+              <div className="flex mb-1 justify-between items-center">
+                <h3 className="landing-h2 text-[0.7rem] sm:text-sm md:text-base lg:text-xl">
                   {data[idNumber].title}
                 </h3>
-                <div
-                  className={` ${data[idNumber].bg} ${data[idNumber].text} text-[0.45rem] sm:text-[0.6rem] md:text-xs sm:px-1 lg:px-2 rounded-xl h-max fon font-bold hidden md:block`}
-                >
+                <div className="bg-amber-500/10 dark:bg-[#39ff14]/10 text-amber-700 dark:text-[#39ff14] text-[0.45rem] sm:text-[0.6rem] md:text-xs sm:px-1 lg:px-2 rounded-lg h-max font-console font-bold hidden md:block">
                   {data[idNumber].tag}
                 </div>
               </div>
-              <p className=" text-[0.58rem] sm:text-[0.7rem] md:text-[0.9rem] md:text-base lg:text-[1.015rem] font-normal md:w-[90%] ">
+              <p className="landing-body text-[0.58rem] sm:text-[0.7rem] md:text-[0.9rem] md:text-base lg:text-[1.015rem] md:w-[90%]">
                 {data[idNumber].desc}
               </p>
             </div>
           </div>
           <button
-            className="bg-[#fce4fe] dark:bg-[#a995ab] dark:hover:bg-[#7a747b] h-max w-max hover:bg-[#f7eeff] group px-1 py-1 rounded-full select-none hidden md:block"
+            className="font-console group bg-slate-100 dark:bg-slate-800/80 hover:bg-amber-100 dark:hover:bg-[#39ff14]/10 border border-slate-200 dark:border-[#39ff14]/20 h-max w-max px-2 py-1.5 rounded-lg select-none hidden md:block transition-colors duration-300"
             onClick={rightArrow}
           >
-            <HiOutlineArrowLongRight className="w-5 h-3 sm:w-6 sm:h-4 md:w-8 md:h-5 lg:w-10 lg:h-6 stroke-[3] group-hover:fill-[#dd44eb]" />
+            <HiOutlineArrowLongRight className="w-5 h-3 sm:w-6 sm:h-4 md:w-8 md:h-5 lg:w-10 lg:h-6 stroke-[3] text-amber-600 dark:text-[#39ff14] group-hover:text-amber-700 dark:group-hover:text-[#00ff41]" />
           </button>
         </div>
         {/* <div className="mt-12 pb-12 grid grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8 w-[80%] sm:w-[75%] md:w-[70%] mx-auto items-center justify-items-center justify-center place-content-center overflow-hidden"> */}
 
-        <ImageList className="my-12" variant="masonry" cols={4} gap={8}>
-          {data.map((obj, i) => {
-            return (
-              <ImageListItem key={obj.img}>
-                <img
+        <ImageList
+          className="my-12"
+          variant="masonry"
+          cols={4}
+          gap={12}
+          sx={{
+            gridTemplateColumns: {
+              xs: "repeat(2, 1fr)",
+              sm: "repeat(3, 1fr)",
+              md: "repeat(4, 1fr)",
+            },
+            padding: 3,
+            overflow: "visible",
+          }}
+        >
+          {data.map((obj, i) => (
+            <ImageListItem key={obj.id}>
+              <div
+                onClick={() => changeId(i)}
+                className={`rounded-xl overflow-hidden cursor-pointer transition-all duration-300 object-contain bg-slate-50/80 dark:bg-slate-900/80 shadow-md hover:shadow-lg hover:shadow-amber-500/20 dark:hover:shadow-[#39ff14]/20 ${
+                  idNumber === i ? "shadow-xl shadow-amber-500/50 dark:shadow-[#39ff14]/50" : ""
+                }`}
+              >
+                <Image
                   src={obj.main}
-                  className=" rounded-lg cursor-pointer select-none group-hover:scale-[1.1] transition-all duration-700 object-contain"
-                  alt={obj.alt}
-                  //           sizes="(max-width: 768px) 100vw,
-                  // (max-width: 1200px) 50vw,
-                  // 33vw"
-                  onClick={() => {
-                    changeId(i);
-                  }}
+                  alt={obj.title}
+                  width={120}
+                  height={120}
+                  className="w-full h-auto select-none object-contain p-2"
+                  sizes="(max-width: 768px) 80px, 120px"
+                  onClick={() => changeId(i)}
                 />
-              </ImageListItem>
-            );
-          })}
+              </div>
+            </ImageListItem>
+          ))}
         </ImageList>
         {/* </div> */}
 

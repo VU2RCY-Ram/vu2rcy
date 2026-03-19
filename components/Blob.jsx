@@ -1,35 +1,30 @@
 const Blob = () => {
   return (
-    <div className="relative">
-      <div className="absolute right-20 -z-10 h-screen w-full">
-        <div
-          className="animate-mainBlob1 absolute top-[23rem] right-24 md:top-[20rem] md:right-52 lg:top-10 lg:-right-10 w-[7rem] h-[8.5rem] md:w-40 md:h-[12rem] lg:w-60 lg:h-[17rem] rounded-full mix-blend-multiply"
-          style={{
-            background: 'radial-gradient(circle at center, #ffbe0b, transparent 45%)',
-            filter: 'blur(30px)',
-            outline: '30px solid #ffd900',
-            opacity: '0.6',
-          }}
-        ></div>
-        <div
-          className="animate-mainBlob2 absolute top-[24rem] -right-24 md:top-[22rem] md:-right-0 lg:top-20 lg:-right-36 w-[8.8rem] h-[10.4rem] md:w-[11rem] md:h-[13.4rem] lg:w-[14rem] lg:h-[17rem] rounded-full mix-blend-overlay"
-          style={{
-            background: 'radial-gradient(circle at center, #ff006e, transparent 45%)',
-            filter: 'blur(30px)',
-            outline: '30px solid #ff2d89',
-            opacity: '0.6',
-          }}
-        ></div>
-        <div
-          className="animate-mainBlob3 absolute top-[34rem] -right-4 md:top-[32rem] md:right-32 lg:top-48 lg:-right-12 w-[5rem] h-[6rem] md:w-[7rem] md:h-[8.3rem] lg:w-[12rem] lg:h-[14rem] rounded-full mix-blend-multiply"
-          style={{
-            background: 'radial-gradient(circle at center, #14b8a6, transparent 45%)',
-            filter: 'blur(30px)',
-            outline: '30px solid #00b39a',
-            opacity: '0.6',
-          }}
-        ></div>
-      </div>
+    <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+      {/* Phosphor-green signal orb */}
+      <div
+        className="absolute top-[20rem] -right-16 md:top-32 md:right-[10%] lg:top-24 lg:right-[15%] w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full opacity-40 dark:opacity-50"
+        style={{
+          background: "radial-gradient(circle at center, rgba(57, 255, 20, 0.25), transparent 60%)",
+          filter: "blur(40px)",
+        }}
+      />
+      {/* Amber warm glow */}
+      <div
+        className="absolute top-[28rem] right-[5%] md:top-48 md:right-[25%] lg:top-64 lg:right-[30%] w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 rounded-full opacity-35 dark:opacity-40"
+        style={{
+          background: "radial-gradient(circle at center, rgba(251, 191, 36, 0.2), transparent 55%)",
+          filter: "blur(35px)",
+        }}
+      />
+      {/* Signal blue accent */}
+      <div
+        className="absolute top-[22rem] right-[20%] md:top-36 md:right-[35%] lg:top-40 lg:right-[40%] w-32 h-32 md:w-44 md:h-44 lg:w-56 lg:h-56 rounded-full opacity-30 dark:opacity-35"
+        style={{
+          background: "radial-gradient(circle at center, rgba(0, 212, 255, 0.18), transparent 50%)",
+          filter: "blur(30px)",
+        }}
+      />
     </div>
   );
 };
