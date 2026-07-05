@@ -7,6 +7,7 @@ import Contact from "@/components/Contact";
 import Experience from "@/components/Experience";
 import Head from "next/head";
 import HorizontalLine from "@/components/HorizontalLine";
+import Link from "next/link";
 
 export default function Home() {
   const { systemTheme, theme, setTheme } = useTheme();
@@ -47,6 +48,14 @@ export default function Home() {
               bands, modes, and satellite communication. Ham radio unites a
               global community with shared passion and curiosity.{" "}
             </p>
+            <div className="mt-8 flex justify-start">
+              <Link
+                href="/projects"
+                className="group w-full sm:w-auto text-center rounded-2xl px-8 py-4 sm:px-12 sm:py-5 text-lg sm:text-xl md:text-2xl font-bold tracking-wide text-white bg-gradient-to-r from-purple-500 via-indigo-500 to-cyan-500 hover:from-purple-600 hover:via-indigo-600 hover:to-cyan-600 dark:from-purple-700 dark:via-violet-700 dark:to-blue-700 dark:hover:from-purple-600 dark:hover:via-violet-600 dark:hover:to-blue-600 shadow-lg hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-1"
+              >
+                PROJECTS
+              </Link>
+            </div>
           </div>
         </div>
         <div className="mt-28 mx-auto">
