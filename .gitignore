@@ -3,7 +3,12 @@
 # dependencies
 /node_modules
 /.pnp
-.pnp.js
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
 # testing
 /coverage
@@ -23,9 +28,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
-# local env files
-.env*.local
+# env files (can opt-in for committing if needed)
+.env*
 
 # vercel
 .vercel
@@ -33,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# claude code
+.claude/settings.local.json
+
+# legacy reference source (has its own nested git repo + graphify cache),
+# not part of this project — kept locally for porting content/images only
+/OLD_CODE_BASE/
+
+# staging folder of raw product photos/manuals/screenshots dropped at the
+# repo root for porting into public/catalogue/ — not part of this project,
+# same as OLD_CODE_BASE (see CLAUDE.md's Information architecture section)
+/NewProducts/

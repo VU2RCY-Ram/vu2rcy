@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://vu2rcy.com
-
-# Sitemaps
-Sitemap: https://vu2rcy.com/sitemap.xml
