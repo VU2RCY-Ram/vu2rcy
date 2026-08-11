@@ -31,7 +31,7 @@ export function ProductCarousel({ products }: { products: Product[] }) {
         </Link>
       </div>
 
-      <Carousel opts={{ align: "start" }} className="sm:mx-12">
+      <Carousel opts={{ align: "start" }} className="sm:mx-16">
         <CarouselContent>
           {products.map((product) => (
             <CarouselItem
