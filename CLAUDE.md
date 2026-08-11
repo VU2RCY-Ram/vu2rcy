@@ -39,6 +39,16 @@ anchor links, analytics, and E2E test targeting. Add this as you touch
 each component; retrofit older ones opportunistically rather than as a
 separate pass.
 
+**Hard rule: no made-up facts.** This site showcases real products and
+real station equipment — specs, model numbers, prices, capabilities,
+credentials, whatever. Every factual claim must trace back to a real
+source (`OLD_CODE_BASE` while it existed, the `NewProducts/` staging
+materials, vu2rcy.com live, or something the user states directly). If a
+fact isn't available, say so and ask rather than filling the gap with a
+plausible-sounding invention. This includes the **`humanize`** skill
+(see "Voice" below): humanizing rewrites sentences for tone, it never
+adds a claim, spec, or detail that wasn't already there.
+
 ## Information architecture
 
 - **`/products`** + **`/products/[slug]`** — `src/lib/data/products.ts`,

@@ -26,7 +26,7 @@ export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) 
           Feedback from hams who&apos;ve built and used my kits.
         </p>
 
-        <Carousel opts={{ align: "start" }} className="mt-6 sm:mx-12">
+        <Carousel opts={{ align: "start" }} className="mt-6 sm:mx-16">
           <CarouselContent>
             {testimonials.map((testimonial) => (
               <CarouselItem

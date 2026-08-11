@@ -37,7 +37,7 @@ export const products: Product[] = [
     slug: "master-aprs",
     name: "MASTER-APRS",
     tagline:
-      "Compact USB APRS dongle for a fixed station — WiFi built in, beacons to APRS-IS on 144.390MHz around the clock.",
+      "Compact USB APRS dongle for a fixed station — WiFi built in, beacons to APRS-IS around the clock.",
     image: "/catalogue/products/master-aprs.jpg",
     isNew: true,
     addedAt: "2026-08-06",
@@ -45,7 +45,7 @@ export const products: Product[] = [
     userManual: "/catalogue/products/manuals/master-aprs-manual.pdf",
     youtubeVideo: "",
     content: [
-      "This is my MASTER-APRS dongle: a USB-powered APRS station built for a fixed location. Plug it into a 5V USB source, connect it to WiFi, and it beacons your position and callsign to the APRS-IS network on 144.390MHz, so you show up on aprs.fi without any other hardware running.",
+      "This is my MASTER-APRS dongle: a USB-powered APRS station built for a fixed location. Plug it into a 5V USB source, connect it to WiFi, and it beacons your position and callsign to the APRS-IS network, so you show up on aprs.fi without any other hardware running.",
       "Setup happens entirely through a browser: pick your APRS icon and SSID, and set a custom beacon message. Once it's configured it's meant to just stay plugged in and running, not something you need to keep tending to.",
     ],
   },
