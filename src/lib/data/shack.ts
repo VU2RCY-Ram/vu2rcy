@@ -10,6 +10,7 @@ export type Equipment = {
   image?: string
   specs?: EquipmentSpec[]
   whatsapp?: boolean
+  youtubeVideo?: string
 }
 
 export type ShackCategory = {
@@ -134,6 +135,8 @@ export const shackCategories: ShackCategory[] = [
           { label: "Power handling", value: "100 Watts" },
           { label: "Dimensions", value: "5m (L) x 2m (W) x 1m (H)" },
         ],
+        youtubeVideo: "https://www.youtube.com/watch?v=oA2iHjmIGks",
+        whatsapp: true,
       },
       {
         slug: "uhf-slimjim",

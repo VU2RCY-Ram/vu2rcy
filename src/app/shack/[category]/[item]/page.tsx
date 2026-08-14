@@ -8,6 +8,7 @@ import { ProductImage } from "@/components/products/product-image";
 import { getEquipmentItem, shackCategories } from "@/lib/data/shack";
 import { pageMetadata } from "@/lib/seo";
 import { WHATSAPP_LINK } from "@/lib/constants";
+import { getYoutubeEmbedUrl } from "@/lib/utils";
 
 type EquipmentPageProps = {
   params: Promise<{ category: string; item: string }>;
@@ -111,6 +112,20 @@ export default async function EquipmentPage({ params }: EquipmentPageProps) {
           )}
         </div>
       </div>
+
+      {item.youtubeVideo && (
+        <div id="equipment-video" className="mt-8 max-w-2xl border-t pt-6">
+          <div className="aspect-video overflow-hidden rounded-xl border">
+            <iframe
+              src={getYoutubeEmbedUrl(item.youtubeVideo)}
+              title={`${item.name} video`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="h-full w-full"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
