@@ -51,3 +51,8 @@ next-env.d.ts
 # repo root for porting into public/catalogue/ — not part of this project,
 # same as OLD_CODE_BASE (see CLAUDE.md's Information architecture section)
 /NewProducts/
+
+# same staging pattern as /NewProducts/ above, dropped separately —
+# HAM_MASTER_USRP and HAM_MESHSTATIC_NEON inside are still unported
+/new products/
+/new products.zip

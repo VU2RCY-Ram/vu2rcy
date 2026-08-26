@@ -4,6 +4,11 @@ export type Product = {
   tagline: string
   image?: string
   detailImage?: string
+  // Extra real photos for the detail page's auto-sliding carousel. When
+  // present (2+ entries), the detail page shows this carousel instead of
+  // the single static hero image. `image` is still what's used as the
+  // cover photo on the products grid card.
+  gallery?: string[]
   // Two or three short paragraphs, rendered as-is. Written in first person,
   // one per real fact worth mentioning — not a bolded benefits list. See
   // CLAUDE.md's Voice section: this replaced an intro/benefits/conclusion
@@ -190,21 +195,127 @@ export const products: Product[] = [
       "Setup is a one-time WiFi connection through a browser page the clock hosts itself. After that it just runs, and if you ever move it to a different network, the same setup page brings it back online.",
     ],
   },
+  {
+    slug: "aprs-pro",
+    name: "APRS Pro",
+    tagline:
+      "All-in-one APRS IGATE, digipeater and GPS tracker with RF radio connectivity, built into a metal enclosure.",
+    image: "/catalogue/products/aprs-pro.jpg",
+    gallery: [
+      "/catalogue/products/aprs-pro.jpg",
+      "/catalogue/products/aprs-pro-back.jpg",
+      "/catalogue/products/aprs-pro-display.jpg",
+    ],
+    isNew: true,
+    addedAt: "2026-08-26",
+    whatsapp: true,
+    userManual: "",
+    youtubeVideo: "",
+    content: [
+      "APRS Pro is an all-in-one APRS station I built — it works as an IGATE, digipeater and GPS tracker at once, so one box covers jobs that would otherwise need several separate devices.",
+      "It has its own GPS receiver with an external SMA antenna connector for a fast fix, and connects to a radio over a DB9 port for actual RF APRS work, not just internet gatewaying. Power comes in over USB-C at 5V, and an onboard display cycles through system info like IP address, WiFi signal and firmware version. Front-panel GPS, Tx and Rx LEDs show at a glance what it's doing.",
+      "The whole thing is built into a metal enclosure, which keeps it solid enough for a permanent station install.",
+    ],
+  },
+  {
+    slug: "lora-aprs",
+    name: "LoRa APRS",
+    tagline:
+      "Long-range, low-power APRS tracker over LoRa radio on the 70cm band, with a big display and long battery life.",
+    image: "/catalogue/products/lora-aprs.jpg",
+    gallery: [
+      "/catalogue/products/lora-aprs.jpg",
+      "/catalogue/products/lora-aprs-wifi-info.jpg",
+      "/catalogue/products/lora-aprs-igate-status.jpg",
+      "/catalogue/products/lora-aprs-boot.jpg",
+    ],
+    isNew: true,
+    addedAt: "2026-08-26",
+    whatsapp: true,
+    userManual: "",
+    youtubeVideo: "",
+    content: [
+      "This is a LoRa APRS tracker: it broadcasts real-time GPS position using long-range, low-power LoRa radio on the 70cm amateur band, at 433.775MHz with a 125kHz bandwidth and spreading factor 12 — LoRa's usual tradeoff of speed for range and power efficiency, which suits a battery-powered tracker well.",
+      "It has a 2.4-inch display, a 5000mAh battery for a full day's use, and its own charging circuit: a red LED means it's charging, blue means it's full. The same GPS, Tx and Rx status LEDs as my other APRS builds show it's locked and transmitting.",
+      "It's built into a solid cabinet so it can ride along in a bag or a vehicle without needing extra protection.",
+    ],
+  },
+  {
+    slug: "lora-aprs-igate",
+    name: "LoRa APRS IGate",
+    tagline:
+      "Fixed LoRa gateway that relays other stations' LoRa APRS packets onto aprs.fi.",
+    image: "/catalogue/products/lora-aprs-igate.jpg",
+    gallery: [
+      "/catalogue/products/lora-aprs-igate.jpg",
+      "/catalogue/products/lora-aprs-igate-scale.jpg",
+      "/catalogue/products/lora-aprs-igate-ports.jpg",
+    ],
+    isNew: true,
+    addedAt: "2026-08-26",
+    whatsapp: true,
+    userManual: "",
+    youtubeVideo: "",
+    content: [
+      "This is a fixed LoRa APRS IGate: it listens for LoRa packets from other stations over RF and uploads that telemetry to the APRS internet system, so those stations show up on aprs.fi the same as with any other APRS-IS gateway.",
+      "It's built around a Heltec WiFi LoRa 32 V3 board in a compact black enclosure, with a USB-C power connector, its own on/off switch, an SMA antenna connector and a power LED.",
+    ],
+  },
+  {
+    slug: "master-aprs-pro",
+    name: "MASTER-APRS Pro",
+    tagline:
+      "Portable APRS station with built-in GPS and a 2.4-inch display, running all day on a 5000mAh battery.",
+    image: "/catalogue/products/master-aprs-pro.jpg",
+    gallery: [
+      "/catalogue/products/master-aprs-pro.jpg",
+      "/catalogue/products/master-aprs-pro-panel.jpg",
+    ],
+    isNew: true,
+    addedAt: "2026-08-26",
+    whatsapp: true,
+    userManual: "",
+    youtubeVideo: "",
+    content: [
+      "MASTER-APRS Pro is a self-contained APRS station with a built-in GPS receiver and internal antenna for a quick fix, and a 2.4-inch display that shows live tracker data as it updates.",
+      "It runs on a 5000mAh battery with its own charging circuit (a red LED means charging, blue means full) and charges over USB-C. On, Rx and Tx LEDs on the front let you confirm at a glance that it's powered and actually transmitting.",
+    ],
+  },
+  {
+    slug: "master-aprs-tracker",
+    name: "MASTER-APRS Tracker",
+    tagline:
+      "The smallest tracker in the MASTER-APRS line — built-in GPS and antenna in a 50 x 50 x 17mm case.",
+    image: "/catalogue/products/master-aprs-tracker.jpg",
+    gallery: [
+      "/catalogue/products/master-aprs-tracker.jpg",
+      "/catalogue/products/master-aprs-tracker-scale.jpg",
+    ],
+    isNew: true,
+    addedAt: "2026-08-26",
+    whatsapp: true,
+    userManual: "",
+    youtubeVideo: "",
+    content: [
+      "MASTER-APRS Tracker is the smallest of my APRS trackers, built into a case just 50 x 50 x 17mm with a 1.3-inch display, built-in GPS and antenna.",
+      "It runs on 5V over USB-C and is made in India. The onboard screen shows live GPS info (latitude, longitude, altitude, speed, satellite count) so you can confirm it has a fix before heading out.",
+    ],
+  },
 ]
 
 export function getProductBySlug(slug: string) {
   return products.find((product) => product.slug === slug)
 }
 
-// Home page carousel order: isNew products first (oldest addedAt to
-// newest), then every other product after, in catalogue order. Array.sort
+// Home page carousel order: isNew products first (newest addedAt to
+// oldest), then every other product after, in catalogue order. Array.sort
 // is stable, so non-isNew products keep their relative order untouched.
 export function getNewProducts() {
   return [...products].sort((a, b) => {
     if (a.isNew && !b.isNew) return -1
     if (!a.isNew && b.isNew) return 1
     if (a.isNew && b.isNew) {
-      return (a.addedAt ?? "").localeCompare(b.addedAt ?? "")
+      return (b.addedAt ?? "").localeCompare(a.addedAt ?? "")
     }
     return 0
   })
