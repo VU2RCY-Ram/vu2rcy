@@ -10,6 +10,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { ProductImage } from "@/components/products/product-image";
+import { ProductGallery } from "@/components/products/product-gallery";
 import { getProductBySlug, products } from "@/lib/data/products";
 import { WHATSAPP_LINK } from "@/lib/constants";
 import { pageMetadata } from "@/lib/seo";
@@ -61,12 +62,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
       </Link>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <ProductImage
-          variant="hero"
-          src={product.detailImage ?? product.image}
-          alt={product.name}
-          className="rounded-xl"
-        />
+        {product.gallery && product.gallery.length > 1 ? (
+          <ProductGallery images={product.gallery} alt={product.name} />
+        ) : (
+          <ProductImage
+            variant="hero"
+            src={product.detailImage ?? product.image}
+            alt={product.name}
+            className="rounded-xl"
+          />
+        )}
 
         <div>
           {product.isNew && (
