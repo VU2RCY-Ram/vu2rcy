@@ -1,4 +1,5 @@
-const WHATSAPP_NUMBER = "7388407388"
+// wa.me needs the full international number (91 = India), no + or spaces.
+const WHATSAPP_NUMBER = "917388407388"
 export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`
 
 // The old site's domain (ported from next-sitemap.config.js's siteUrl).
