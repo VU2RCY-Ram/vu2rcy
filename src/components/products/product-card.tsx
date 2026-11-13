@@ -15,7 +15,7 @@ import type { Product } from "@/lib/data/products"
 
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <Card className="h-full transition-shadow hover:shadow-md hover:shadow-primary/10">
+    <Card className="h-full pt-0 transition-shadow hover:shadow-md hover:shadow-primary/10">
       <ProductImage src={product.image} alt={product.name} />
       <CardHeader>
         {product.isNew && (

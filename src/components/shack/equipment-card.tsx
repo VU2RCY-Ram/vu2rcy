@@ -20,7 +20,7 @@ export function EquipmentCard({
   const href = `/shack/${categorySlug}/${item.slug}`
 
   return (
-    <Card className="h-full transition-shadow hover:shadow-md hover:shadow-primary/10">
+    <Card className="h-full pt-0 transition-shadow hover:shadow-md hover:shadow-primary/10">
       <ProductImage src={item.image} alt={item.name} />
       <CardHeader>
         <CardTitle className="text-base">
