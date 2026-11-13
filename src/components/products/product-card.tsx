@@ -1,6 +1,8 @@
 import Link from "next/link"
+import { NewspaperIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -35,7 +37,26 @@ export function ProductCard({ product }: { product: Product }) {
       <CardContent className="text-sm text-muted-foreground">
         {product.tagline}
       </CardContent>
-      <CardFooter className="justify-end">
+      <CardFooter className="justify-between gap-2">
+        {product.brochure ? (
+          <Button
+            variant="outline"
+            size="sm"
+            nativeButton={false}
+            render={
+              <a
+                href={product.brochure}
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            }
+          >
+            <NewspaperIcon />
+            View brochure
+          </Button>
+        ) : (
+          <span />
+        )}
         <Link
           href={`/products/${product.slug}`}
           className="text-sm font-medium text-primary hover:underline"
