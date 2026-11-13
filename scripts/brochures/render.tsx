@@ -1,41 +1,18 @@
 // Renders the A4 brochure and user manual PDFs from src/lib/data/brochures.ts.
 // Usage: npm run brochures [-- <slug>...] [--only brochure|manual] [--html]
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
+import { mkdirSync, writeFileSync } from "node:fs"
 import path from "node:path"
 import { renderToStaticMarkup } from "react-dom/server"
 import QRCode from "qrcode"
-import { chromium } from "playwright"
-import { BROCHURE_ICONS, brochures, type Brochure } from "@/lib/data/brochures"
+import { chromium, type Browser } from "playwright"
+import { ALL_BROCHURES_PDF, BROCHURE_ICONS, brochures, type Brochure } from "@/lib/data/brochures"
 import { getProductBySlug } from "@/lib/data/products"
 import { productWhatsappLink, type EnquirySource } from "@/lib/contact"
 import { baseCss, brochureCss, manualCss } from "./styles"
 import { BrochureDoc, ManualDoc, type Assets } from "./templates"
-
-const ROOT = path.resolve(__dirname, "../..")
-const PUBLIC = path.join(ROOT, "public")
-const FONT_DIR = path.join(ROOT, "node_modules/@fontsource-variable/plus-jakarta-sans/files")
-const MIME: Record<string, string> = { ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp" }
+import { PUBLIC, ROOT, dataUri, fontCss } from "./shared"
 
 type Kind = "brochure" | "manual"
-
-function dataUri(publicPath: string) {
-  const file = path.join(PUBLIC, publicPath)
-  if (!existsSync(file)) throw new Error(`Missing file: public${publicPath}`)
-  const mime = MIME[path.extname(file).toLowerCase()]
-  if (!mime) throw new Error(`Unsupported image type: ${publicPath}`)
-  return `data:${mime};base64,${readFileSync(file).toString("base64")}`
-}
-
-function fontCss() {
-  // Latin + Latin Extended cover everything the data uses.
-  return ["latin-ext", "latin"]
-    .map((subset) => {
-      const woff = readFileSync(path.join(FONT_DIR, `plus-jakarta-sans-${subset}-wght-normal.woff2`))
-      return `@font-face { font-family: "Plus Jakarta Sans"; font-weight: 200 800;
-        src: url(data:font/woff2;base64,${woff.toString("base64")}) format("woff2"); }`
-    })
-    .join("\n")
-}
 
 function validate(b: Brochure) {
   const product = getProductBySlug(b.slug)
@@ -67,13 +44,28 @@ async function html(kind: Kind, b: Brochure) {
     kind === "brochure"
       ? renderToStaticMarkup(<BrochureDoc b={b} product={product} assets={assets} />)
       : renderToStaticMarkup(<ManualDoc b={b} product={product} assets={assets} />)
-  const css = fontCss() + baseCss + (kind === "brochure" ? brochureCss : manualCss)
   const title = `${product.name} ${kind === "brochure" ? "brochure" : "user manual"}`
-  return {
-    product,
-    title,
-    page: `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${title}</title><style>${css}</style></head><body>${body}</body></html>`,
+  return { product, title, body, page: wrap(kind, title, body) }
+}
+
+function wrap(kind: Kind, title: string, body: string) {
+  const css = fontCss() + baseCss + (kind === "brochure" ? brochureCss : manualCss)
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${title}</title><style>${css}</style></head><body>${body}</body></html>`
+}
+
+async function print(browser: Browser, doc: string, out: string, label: string, onePagePerSheet: boolean) {
+  const page = await browser.newPage()
+  await page.setContent(doc, { waitUntil: "load" })
+  await page.evaluate(() => document.fonts.ready)
+  if (onePagePerSheet) {
+    const spill = await page.evaluate(() =>
+      Math.max(...[...document.querySelectorAll<HTMLElement>(".sheet")].map((s) => s.scrollHeight - s.clientHeight)),
+    )
+    if (spill > 1) throw new Error(`${label}: a brochure is ${spill}px taller than one A4 page; trim the data`)
   }
+  await page.pdf({ path: out, format: "A4", printBackground: true, preferCSSPageSize: true, tagged: true })
+  await page.close()
+  console.log(`pdf   ${path.relative(ROOT, out)}  (${label})`)
 }
 
 function outPath(kind: Kind, slug: string, product: { brochure?: string; userManual: string }) {
@@ -104,20 +96,14 @@ async function main() {
           console.log(`html  ${path.relative(ROOT, out.replace(/\.pdf$/, ".html"))}`)
           continue
         }
-        const page = await browser!.newPage()
-        await page.setContent(doc, { waitUntil: "load" })
-        await page.evaluate(() => document.fonts.ready)
-        if (kind === "brochure") {
-          const spill = await page.evaluate(() => {
-            const s = document.querySelector(".sheet") as HTMLElement
-            return s.scrollHeight - s.clientHeight
-          })
-          if (spill > 1) throw new Error(`${b.slug}: brochure is ${spill}px taller than one A4 page; trim the data`)
-        }
-        await page.pdf({ path: out, format: "A4", printBackground: true, preferCSSPageSize: true, tagged: true })
-        await page.close()
-        console.log(`pdf   ${path.relative(ROOT, out)}  (${title})`)
+        await print(browser!, doc, out, title, kind === "brochure")
       }
+    }
+    // The combined PDF always holds every brochure, whatever slugs were picked.
+    if (kinds.includes("brochure") && browser) {
+      const bodies = await Promise.all(brochures.map((b) => html("brochure", b)))
+      const doc = wrap("brochure", "VU2RCY brochures", bodies.map((r) => r.body).join(""))
+      await print(browser, doc, path.join(PUBLIC, ALL_BROCHURES_PDF), "all brochures", true)
     }
   } finally {
     await browser?.close()

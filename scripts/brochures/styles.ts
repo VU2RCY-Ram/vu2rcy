@@ -99,6 +99,7 @@ export const brochureCss = `
 @page { size: A4; margin: 0; }
 .sheet { width: 210mm; height: 297mm; padding: 12mm 14mm 10mm; overflow: hidden;
   display: flex; flex-direction: column; gap: 5mm; }
+.sheet + .sheet { break-before: page; }
 .intro { font-size: 12pt; line-height: 1.45; color: var(--muted); max-width: 165mm; }
 .main { display: grid; grid-template-columns: 84mm 1fr; gap: 7mm; align-items: stretch; }
 .main .photo { min-height: 84mm; padding: 4mm; }

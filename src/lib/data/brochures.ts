@@ -252,6 +252,9 @@ export const brochures: Brochure[] = [
   },
 ]
 
+// Every brochure in one PDF, linked from /products.
+export const ALL_BROCHURES_PDF = "/catalogue/products/brochures/vu2rcy-brochures.pdf"
+
 export function getBrochure(slug: string) {
   return brochures.find((b) => b.slug === slug)
 }
