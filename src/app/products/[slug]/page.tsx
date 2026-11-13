@@ -6,13 +6,14 @@ import {
   CirclePlayIcon,
   FileTextIcon,
   MessageCircleIcon,
+  NewspaperIcon,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ProductImage } from "@/components/products/product-image";
 import { ProductGallery } from "@/components/products/product-gallery";
 import { getProductBySlug, products } from "@/lib/data/products";
-import { WHATSAPP_LINK } from "@/lib/constants";
+import { productWhatsappLink } from "@/lib/contact";
 import { pageMetadata } from "@/lib/seo";
 
 type ProductPageProps = {
@@ -84,7 +85,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </h1>
           <p className="mt-2 text-muted-foreground">{product.tagline}</p>
 
-          {(product.whatsapp || product.userManual || product.youtubeVideo) && (
+          {(product.whatsapp ||
+            product.userManual ||
+            product.brochure ||
+            product.youtubeVideo) && (
             <div
               id="product-actions"
               className="mt-6 flex flex-wrap gap-3 border-t pt-6"
@@ -94,7 +98,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   nativeButton={false}
                   render={
                     <a
-                      href={WHATSAPP_LINK}
+                      href={productWhatsappLink(product)}
                       target="_blank"
                       rel="noopener noreferrer"
                     />
@@ -118,6 +122,22 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 >
                   <FileTextIcon />
                   User manual
+                </Button>
+              )}
+              {product.brochure && (
+                <Button
+                  variant="outline"
+                  nativeButton={false}
+                  render={
+                    <a
+                      href={product.brochure}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    />
+                  }
+                >
+                  <NewspaperIcon />
+                  Brochure
                 </Button>
               )}
               {product.youtubeVideo && (

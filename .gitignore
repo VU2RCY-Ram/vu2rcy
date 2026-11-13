@@ -56,3 +56,7 @@ next-env.d.ts
 # HAM_MASTER_USRP and HAM_MESHSTATIC_NEON inside are still unported
 /new products/
 /new products.zip
+
+# raw material from Ram (photos, firmware notes) used to write
+# src/lib/data/brochures.ts; data only, same as /NewProducts/
+/brochers/
