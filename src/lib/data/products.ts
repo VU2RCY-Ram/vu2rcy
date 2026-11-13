@@ -318,11 +318,12 @@ export function getProductBySlug(slug: string) {
   return products.find((product) => product.slug === slug)
 }
 
-// Home page carousel order: isNew products first (newest addedAt to
-// oldest), then every other product after, in catalogue order. Array.sort
-// is stable, so non-isNew products keep their relative order untouched.
+// Order for home and /products: kits with a brochure, then isNew (newest
+// first), then the rest in catalogue order (Array.sort is stable).
 export function getNewProducts() {
   return [...products].sort((a, b) => {
+    if (a.brochure && !b.brochure) return -1
+    if (!a.brochure && b.brochure) return 1
     if (a.isNew && !b.isNew) return -1
     if (!a.isNew && b.isNew) return 1
     if (a.isNew && b.isNew) {
