@@ -37,7 +37,7 @@ export function ProductCard({ product }: { product: Product }) {
       <CardContent className="text-sm text-muted-foreground">
         {product.tagline}
       </CardContent>
-      <CardFooter className="justify-between gap-2">
+      <CardFooter className="mt-auto justify-between gap-2">
         {product.brochure ? (
           <Button
             variant="outline"

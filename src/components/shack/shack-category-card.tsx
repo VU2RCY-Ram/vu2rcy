@@ -26,7 +26,7 @@ export function ShackCategoryCard({ category }: { category: ShackCategory }) {
         <CardContent className="text-sm text-muted-foreground">
           {category.description}
         </CardContent>
-        <CardFooter className="justify-between text-sm font-medium text-primary">
+        <CardFooter className="mt-auto justify-between text-sm font-medium text-primary">
           <span>{category.items.length} items</span>
           <ArrowRightIcon className="size-4" />
         </CardFooter>

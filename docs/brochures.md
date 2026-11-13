@@ -5,6 +5,8 @@ Each product with an entry in `src/lib/data/brochures.ts` gets two PDFs:
 - a one-page A4 brochure at `products.ts`'s `brochure` path (`public/catalogue/products/brochures/<slug>.pdf`)
 - a user manual at its `userManual` path (`public/catalogue/products/manuals/<slug>-manual.pdf`)
 
+Whenever brochures are rendered, the script also rebuilds `vu2rcy-brochures.pdf` (every brochure, one per page). The "View all brochures" button on `/products` opens it (`ALL_BROCHURES_PDF` in `brochures.ts`).
+
 ## Render
 
 ```
