@@ -32,7 +32,7 @@ export function EquipmentCard({
       <CardContent className="text-sm text-muted-foreground">
         {item.description}
       </CardContent>
-      <CardFooter className="justify-end">
+      <CardFooter className="mt-auto justify-end">
         <Link
           href={href}
           className="text-sm font-medium text-primary hover:underline"
