@@ -13,6 +13,7 @@ import {
 import { ComingSoonTrigger } from "@/components/products/coming-soon-trigger"
 import { ProductImage } from "@/components/products/product-image"
 import { formatRupees, type Product } from "@/lib/data/products"
+import { cn } from "@/lib/utils"
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -46,8 +47,10 @@ export function ProductCard({ product }: { product: Product }) {
       </CardHeader>
       <CardContent className="text-sm text-muted-foreground">
         {product.tagline}
-        {product.price && (
-          <p className="mt-2 font-semibold text-foreground">
+      </CardContent>
+      {product.price && (
+        <CardContent className="mt-auto text-sm">
+          <p className="font-semibold">
             {formatRupees(product.price.amount)}
             {product.price.note && (
               <span className="ml-1 font-normal text-muted-foreground">
@@ -55,9 +58,11 @@ export function ProductCard({ product }: { product: Product }) {
               </span>
             )}
           </p>
-        )}
-      </CardContent>
-      <CardFooter className="mt-auto justify-between gap-2">
+        </CardContent>
+      )}
+      <CardFooter
+        className={cn("justify-between gap-2", !product.price && "mt-auto")}
+      >
         {product.brochure ? (
           <Button
             variant="outline"
