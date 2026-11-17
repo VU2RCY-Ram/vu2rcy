@@ -2,7 +2,7 @@
 import * as Lucide from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import type { Brochure, BrochureIcon } from "@/lib/data/brochures"
-import { formatRupees, type Product } from "@/lib/data/products"
+import type { Product } from "@/lib/data/products"
 import { CONTACT_EMAIL, SITE_URL, WHATSAPP_DISPLAY } from "@/lib/constants"
 
 const icons = Lucide as unknown as Record<string, LucideIcon>
@@ -126,12 +126,6 @@ export function BrochureDoc({ b, product, assets }: { b: Brochure; product: Prod
 
       <section className="bottom" id="brochure-setup">
         <div>
-          {product.price && (
-            <div className="price keep">
-              <span className="amount">{formatRupees(product.price.amount)}</span>
-              {product.price.note && <span className="price-note">{product.price.note}</span>}
-            </div>
-          )}
           {b.quickSteps && (
             <>
               <h2>Quick setup</h2>
