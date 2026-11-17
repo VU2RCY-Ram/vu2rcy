@@ -7,6 +7,7 @@ export const BROCHURE_ICONS = [
   "Activity",
   "BatteryFull",
   "Building2",
+  "Cable",
   "CalendarDays",
   "CircleCheck",
   "Clock",
@@ -24,6 +25,7 @@ export const BROCHURE_ICONS = [
   "MessagesSquare",
   "Monitor",
   "Plug",
+  "Radio",
   "RadioTower",
   "Settings",
   "ShieldCheck",
@@ -61,9 +63,12 @@ export type Brochure = {
   // Optional "Good for" row, at most 6 entries.
   goodFor?: { icon: BrochureIcon; label: string }[]
   network?: SetupNetwork
-  // 3-4 short steps for the brochure.
-  quickSteps: string[]
-  manual: {
+  // 3-4 short steps for the brochure; leave out when Ram hasn't given any.
+  quickSteps?: string[]
+  // Signal path from Ram's own diagram, shown when there are no quick steps.
+  howItWorks?: { flow: { icon: BrochureIcon; label: string }[]; note?: string }
+  // Leave out when there are no setup steps yet; then only the brochure renders.
+  manual?: {
     subtitle: string
     // 4-6 full steps for the manual.
     steps: string[]
@@ -248,6 +253,62 @@ export const brochures: Brochure[] = [
         "The clock reconnects and syncs the time automatically. No further setup needed.",
       ],
       note: "To switch it to a different Wi-Fi network later, power-cycle the clock and repeat these steps.",
+    },
+  },
+  // From Ram's posters (2026-11-17); setup Wi-Fi from the tracker firmware v2.
+  {
+    slug: "master-aprs-tracker-2",
+    kind: "GPS APRS tracker for your VHF radio",
+    intro:
+      "Plugs into your VHF radio and beacons your GPS position over APRS. Set it up from your phone over Wi-Fi.",
+    features: [
+      { icon: "MapPin", title: "Built-in GPS", text: "Accurate location tracking." },
+      { icon: "Wifi", title: "Web configuration", text: "Easy setup over Wi-Fi." },
+      { icon: "Settings", title: "Your settings", text: "Callsign, SSID, path, interval and comment." },
+      { icon: "Timer", title: "Automatic beaconing", text: "Adjustable interval and smart beaconing." },
+      { icon: "Activity", title: "1200 bps AFSK", text: "AX.25 APRS, with manual TX and channel busy detection." },
+    ],
+    highlights: [
+      { icon: "Radio", title: "Most VHF radios", text: "Handheld, mobile and base." },
+      { icon: "BatteryFull", title: "2000 mAh battery", text: "Built in and rechargeable." },
+      { icon: "Usb", title: "USB-C charging", text: "Charger built in." },
+      { icon: "Zap", title: "Charge light", text: "Red while charging, blue when full." },
+    ],
+    network: { name: "APRS-Tracker", password: "12345678", address: "192.168.4.1" },
+    quickSteps: [
+      "Connect the cable to your radio, tune to the APRS frequency and turn squelch on.",
+      "Switch it on, join its Wi-Fi and open 192.168.4.1 to enter your callsign and settings.",
+      "Tap Save Settings. Once the GPS light is steady, it beacons.",
+    ],
+  },
+  // From Ram's poster (2026-11-17); no setup steps yet.
+  {
+    slug: "master-aprs-igate-rx",
+    kind: "Receive-only APRS iGate",
+    intro:
+      "Receives 1200-baud AFSK APRS packets from a VHF radio, decodes them, and forwards them to APRS-IS over Wi-Fi.",
+    features: [
+      { icon: "Activity", title: "1200 baud AFSK", text: "Receives APRS packets from your radio." },
+      { icon: "Cpu", title: "AX.25 decoding", text: "Decodes the packets it receives." },
+      { icon: "Globe", title: "APRS-IS over Wi-Fi", text: "Forwards received packets to APRS-IS." },
+      { icon: "Monitor", title: "Web configuration", text: "Easy Wi-Fi setup from a browser." },
+      { icon: "CircleCheck", title: "Status lights", text: "Wi-Fi, DCD and Rx indicators." },
+      { icon: "Plug", title: "5V DC", text: "Runs on a 5V DC supply." },
+    ],
+    highlights: [
+      { icon: "Radio", title: "VHF radio in", text: "Works with a suitable audio cable." },
+      { icon: "Wifi", title: "Wi-Fi", text: "Straight to APRS-IS." },
+      { icon: "RadioTower", title: "Receive only", text: "Listens and forwards." },
+      { icon: "Cable", title: "Cable included", text: "Comes with the radio cable." },
+    ],
+    howItWorks: {
+      flow: [
+        { icon: "Radio", label: "VHF radio" },
+        { icon: "Cpu", label: "MASTER-APRS IGATE-Rx" },
+        { icon: "Wifi", label: "Wi-Fi" },
+        { icon: "Globe", label: "APRS-IS" },
+      ],
+      note: "Works with VHF radios using a suitable audio connection cable.",
     },
   },
 ]

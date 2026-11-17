@@ -18,7 +18,7 @@ function validate(b: Brochure) {
   const product = getProductBySlug(b.slug)
   if (!product) throw new Error(`${b.slug}: no product with this slug`)
   if (!product.image) throw new Error(`${b.slug}: product has no image`)
-  const used = [...b.features, ...b.highlights, ...(b.goodFor ?? [])].map((i) => i.icon)
+  const used = [...b.features, ...b.highlights, ...(b.goodFor ?? []), ...(b.howItWorks?.flow ?? [])].map((i) => i.icon)
   const bad = used.filter((i) => !(BROCHURE_ICONS as readonly string[]).includes(i))
   if (bad.length) throw new Error(`${b.slug}: icons not in BROCHURE_ICONS: ${bad.join(", ")}`)
   if (b.features.length < 4 || b.features.length > 6) throw new Error(`${b.slug}: needs 4-6 features`)
@@ -37,7 +37,7 @@ async function html(kind: Kind, b: Brochure) {
   })
   const assets: Assets = {
     photo: dataUri(product.detailImage ?? product.image!),
-    screenshot: b.manual.screenshot ? dataUri(b.manual.screenshot.src) : undefined,
+    screenshot: b.manual?.screenshot ? dataUri(b.manual.screenshot.src) : undefined,
     qrSvg,
   }
   const body =
@@ -88,6 +88,7 @@ async function main() {
   try {
     for (const b of picked) {
       for (const kind of kinds) {
+        if (kind === "manual" && !b.manual) continue
         const { product, page: doc, title } = await html(kind, b)
         const out = outPath(kind, b.slug, product)
         mkdirSync(path.dirname(out), { recursive: true })
