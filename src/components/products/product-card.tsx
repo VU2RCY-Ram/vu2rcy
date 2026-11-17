@@ -10,8 +10,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { ComingSoonTrigger } from "@/components/products/coming-soon-trigger"
 import { ProductImage } from "@/components/products/product-image"
-import type { Product } from "@/lib/data/products"
+import { formatRupees, type Product } from "@/lib/data/products"
+import { cn } from "@/lib/utils"
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -26,18 +28,41 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
         )}
         <CardTitle className="mt-1 text-base">
-          <Link
-            href={`/products/${product.slug}`}
-            className="hover:text-primary hover:underline"
-          >
-            {product.name}
-          </Link>
+          {product.comingSoon ? (
+            <ComingSoonTrigger
+              name={product.name}
+              className="hover:text-primary hover:underline"
+            >
+              {product.name}
+            </ComingSoonTrigger>
+          ) : (
+            <Link
+              href={`/products/${product.slug}`}
+              className="hover:text-primary hover:underline"
+            >
+              {product.name}
+            </Link>
+          )}
         </CardTitle>
       </CardHeader>
       <CardContent className="text-sm text-muted-foreground">
         {product.tagline}
       </CardContent>
-      <CardFooter className="mt-auto justify-between gap-2">
+      {product.price && (
+        <CardContent className="mt-auto text-sm">
+          <p className="font-semibold">
+            {formatRupees(product.price.amount)}
+            {product.price.note && (
+              <span className="ml-1 font-normal text-muted-foreground">
+                {product.price.note.toLowerCase()}
+              </span>
+            )}
+          </p>
+        </CardContent>
+      )}
+      <CardFooter
+        className={cn("justify-between gap-2", !product.price && "mt-auto")}
+      >
         {product.brochure ? (
           <Button
             variant="outline"
@@ -57,12 +82,21 @@ export function ProductCard({ product }: { product: Product }) {
         ) : (
           <span />
         )}
-        <Link
-          href={`/products/${product.slug}`}
-          className="text-sm font-medium text-primary hover:underline"
-        >
-          View details
-        </Link>
+        {product.comingSoon ? (
+          <ComingSoonTrigger
+            name={product.name}
+            className="text-sm font-medium text-primary hover:underline"
+          >
+            View details
+          </ComingSoonTrigger>
+        ) : (
+          <Link
+            href={`/products/${product.slug}`}
+            className="text-sm font-medium text-primary hover:underline"
+          >
+            View details
+          </Link>
+        )}
       </CardFooter>
     </Card>
   )

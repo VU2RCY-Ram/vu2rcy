@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { SITE_URL } from "@/lib/constants";
-import { products } from "@/lib/data/products";
+import { detailProducts } from "@/lib/data/products";
 import { shackCategories } from "@/lib/data/shack";
 
 // Generated at build time (Next.js's native sitemap.ts convention) —
@@ -41,7 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
+  const productRoutes: MetadataRoute.Sitemap = detailProducts.map((product) => ({
     url: `${SITE_URL}/products/${product.slug}`,
     changeFrequency: "weekly",
     priority: 0.7,

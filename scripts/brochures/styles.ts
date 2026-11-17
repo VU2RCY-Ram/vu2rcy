@@ -105,6 +105,15 @@ export const brochureCss = `
 .main .photo { min-height: 84mm; padding: 4mm; }
 .bottom { display: grid; grid-template-columns: 1fr 92mm; gap: 7mm; margin-top: auto; }
 .bottom .network { margin-top: 3mm; }
+.price { display: flex; align-items: baseline; gap: 3mm; margin-bottom: 2mm; padding: 1.5mm 4mm;
+  border-radius: 3mm; background: var(--teal-900); color: #fff; }
+.price .amount { font-size: 18pt; font-weight: 800; }
+.flow { list-style: none; display: flex; flex-direction: column; align-items: flex-start; gap: 4mm; }
+.flow .chip { position: relative; }
+.flow li:not(:last-child)::after { content: "↓"; position: absolute; left: 4mm; bottom: -4.2mm;
+  font-size: 9pt; color: var(--teal-600); }
+.how-note { margin-top: 3mm; font-size: 9pt; color: var(--muted); }
+.price .price-note { font-size: 9.5pt; font-weight: 600; opacity: 0.85; }
 .footer { border-top: 0.3mm solid var(--line); padding-top: 2.5mm; }
 `
 
