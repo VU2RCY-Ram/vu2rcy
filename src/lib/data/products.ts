@@ -317,11 +317,11 @@ export const products: Product[] = [
       "It runs on 5V over USB-C and is made in India. The onboard screen shows live GPS info (latitude, longitude, altitude, speed, satellite count) so you can confirm it has a fix before heading out.",
     ],
   },
-  // Four kits from Ram's 2026-11-15 photos. Facts and prices for the first
-  // two come from his posters (2026-11-17); the other two are name-only.
+  // Four kits from Ram's 2026-11-15 photos, named as printed on each case.
+  // Facts and prices for the first two come from his posters (2026-11-17).
   {
     slug: "master-aprs-tracker-2",
-    name: "MASTER-APRS Tracker",
+    name: "MASTER-APRS TRACKER",
     tagline:
       "GPS APRS tracker that plugs into your VHF radio and sets up over Wi-Fi from your phone.",
     image: "/catalogue/products/master-aprs-tracker-2.jpg",
@@ -369,10 +369,10 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "master-aprs-car-tracker",
-    name: "MASTER-APRS Car Tracker",
-    tagline: "Details coming soon.",
-    image: "/catalogue/products/master-aprs-car-tracker.jpg",
+    slug: "master-aprs-tracker-3",
+    name: "MASTER APRS TRACKER",
+    tagline: "144.390 MHz. Details coming soon.",
+    image: "/catalogue/products/master-aprs-tracker-3.jpg",
     isNew: true,
     addedAt: "2026-11-16",
     comingSoon: true,
@@ -380,10 +380,10 @@ export const products: Product[] = [
     youtubeVideo: "",
   },
   {
-    slug: "master-aprs-base-station",
-    name: "MASTER-APRS Base Station",
-    tagline: "Details coming soon.",
-    image: "/catalogue/products/master-aprs-base-station.jpg",
+    slug: "master-aprs-pro-2",
+    name: "MASTER-APRS PRO",
+    tagline: "IGATE / DIGI / TRACKER. Details coming soon.",
+    image: "/catalogue/products/master-aprs-pro-2.jpg",
     isNew: true,
     addedAt: "2026-11-16",
     comingSoon: true,
