@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ProductImage } from "@/components/products/product-image";
 import { ProductGallery } from "@/components/products/product-gallery";
-import { detailProducts, formatRupees, getProductBySlug } from "@/lib/data/products";
+import { detailProducts, getProductBySlug } from "@/lib/data/products";
 import { productWhatsappLink } from "@/lib/contact";
 import { pageMetadata } from "@/lib/seo";
 
@@ -84,16 +84,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
             {product.name}
           </h1>
           <p className="mt-2 text-muted-foreground">{product.tagline}</p>
-          {product.price && (
-            <p id="product-price" className="mt-4 text-xl font-semibold">
-              {formatRupees(product.price.amount)}
-              {product.price.note && (
-                <span className="ml-2 text-sm font-normal text-muted-foreground">
-                  {product.price.note}
-                </span>
-              )}
-            </p>
-          )}
 
           {(product.whatsapp ||
             product.userManual ||

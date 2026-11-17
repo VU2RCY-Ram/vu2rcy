@@ -255,7 +255,7 @@ export const brochures: Brochure[] = [
       note: "To switch it to a different Wi-Fi network later, power-cycle the clock and repeat these steps.",
     },
   },
-  // From Ram's posters (2026-11-17); setup Wi-Fi from the tracker firmware v2.
+  // From Ram's posters (2026-11-17 12:40); setup Wi-Fi from tracker firmware v2.
   {
     slug: "master-aprs-tracker-2",
     kind: "GPS APRS tracker for your VHF radio",
@@ -281,7 +281,7 @@ export const brochures: Brochure[] = [
       "Tap Save Settings. Once the GPS light is steady, it beacons.",
     ],
   },
-  // From Ram's poster (2026-11-17); no setup steps yet.
+  // From Ram's poster (2026-11-17 12:42); no setup steps yet.
   {
     slug: "master-aprs-igate-rx",
     kind: "Receive-only APRS iGate",
@@ -296,10 +296,10 @@ export const brochures: Brochure[] = [
       { icon: "Plug", title: "5V DC", text: "Runs on a 5V DC supply." },
     ],
     highlights: [
-      { icon: "Radio", title: "VHF radio in", text: "Works with a suitable audio cable." },
+      { icon: "Radio", title: "VHF radio in", text: "Receives from your VHF radio." },
       { icon: "Wifi", title: "Wi-Fi", text: "Straight to APRS-IS." },
       { icon: "RadioTower", title: "Receive only", text: "Listens and forwards." },
-      { icon: "Cable", title: "Cable included", text: "Comes with the radio cable." },
+      { icon: "Cable", title: "Audio cable", text: "Works with a suitable audio connection cable." },
     ],
     howItWorks: {
       flow: [
