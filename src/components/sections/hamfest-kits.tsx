@@ -109,10 +109,14 @@ export function HamfestKits() {
         </div>
 
         <div id="hamfest-kits-peek" className="border-t bg-background px-5 py-4 sm:px-8">
+          <p id="hamfest-kits-swipe-hint" className="mb-2 flex items-center gap-1 text-xs text-muted-foreground sm:hidden">
+            Swipe to see all {kits.length} kits
+            <ArrowRightIcon className="size-3.5" aria-hidden />
+          </p>
           <Carousel opts={{ align: "start" }} className="sm:mx-12">
             <CarouselContent>
               {kits.map((product) => (
-                <CarouselItem key={product.slug} className="basis-1/2 sm:basis-1/3 lg:basis-1/4">
+                <CarouselItem key={product.slug} className="basis-[42%] sm:basis-1/3 lg:basis-1/4">
                   <KitThumb product={product} />
                 </CarouselItem>
               ))}
