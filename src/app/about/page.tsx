@@ -10,7 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { WHATSAPP_LINK } from "@/lib/constants";
+import { CONTACT_EMAIL, WHATSAPP_LINK } from "@/lib/constants";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -41,7 +41,7 @@ const connections = [
   },
   {
     label: "Email",
-    href: "mailto:vu2rcy+social@gmail.com",
+    href: `mailto:${CONTACT_EMAIL}`,
     icon: MailIcon,
     primary: false,
   },
