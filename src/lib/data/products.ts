@@ -332,7 +332,7 @@ export const products: Product[] = [
     isNew: true,
     addedAt: "2026-11-17",
     whatsapp: true,
-    userManual: "",
+    userManual: "/catalogue/products/manuals/master-aprs-tracker-2-manual.pdf",
     youtubeVideo: "",
     brochure: "/catalogue/products/brochures/master-aprs-tracker-2.pdf",
     content: [
@@ -356,7 +356,7 @@ export const products: Product[] = [
     isNew: true,
     addedAt: "2026-11-17",
     whatsapp: true,
-    userManual: "",
+    userManual: "/catalogue/products/manuals/master-aprs-igate-rx-manual.pdf",
     youtubeVideo: "",
     brochure: "/catalogue/products/brochures/master-aprs-igate-rx.pdf",
     content: [

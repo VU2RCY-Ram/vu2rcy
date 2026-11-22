@@ -23,6 +23,7 @@ function validate(b: Brochure) {
   if (bad.length) throw new Error(`${b.slug}: icons not in BROCHURE_ICONS: ${bad.join(", ")}`)
   if (b.features.length < 4 || b.features.length > 6) throw new Error(`${b.slug}: needs 4-6 features`)
   if ((b.goodFor?.length ?? 0) > 6) throw new Error(`${b.slug}: at most 6 goodFor entries`)
+  if (b.manual && !b.manual.steps?.length && !b.manual.sections?.length) throw new Error(`${b.slug}: manual needs steps or sections`)
   return product
 }
 
