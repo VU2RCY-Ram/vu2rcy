@@ -123,4 +123,32 @@ export const manualCss = `
 .doc .steps li { font-size: 10.5pt; }
 .doc .steps li + li { margin-top: 3mm; }
 .keep { break-inside: avoid; }
+
+/* Long manuals (Ram's own sections) */
+.msec { display: block; }
+.msec .group { break-inside: avoid; display: flex; flex-direction: column; gap: 2.5mm; }
+.msec .group + .group { margin-top: 2.5mm; }
+.msec h2 { font-size: 15pt; margin: 0; padding-top: 4mm; border-top: 0.6mm solid var(--teal-100); }
+.msec h3 { font-size: 11pt; font-weight: 700; color: var(--teal-700); margin-top: 2mm; }
+.msec h4 { font-size: 10pt; font-weight: 700; color: var(--ink); margin-top: 1mm; }
+.msec .para { font-size: 10pt; line-height: 1.5; }
+.msec strong { font-weight: 700; }
+.bullets { list-style: none; display: flex; flex-direction: column; gap: 1.6mm; }
+.bullets li { position: relative; padding-left: 5mm; font-size: 10pt; line-height: 1.45; }
+.bullets li::before { content: ""; position: absolute; left: 0.8mm; top: 1.9mm; width: 1.8mm; height: 1.8mm;
+  border-radius: 50%; background: var(--teal-600); }
+table { width: 100%; border-collapse: collapse; font-size: 9.5pt; line-height: 1.4; }
+th { background: var(--teal-900); color: #fff; text-align: left; font-weight: 700; font-size: 8.5pt;
+  letter-spacing: 0.04em; text-transform: uppercase; padding: 2mm 3mm; }
+td { padding: 2mm 3mm; border-bottom: 0.3mm solid var(--line); vertical-align: top; }
+td:first-child { background: var(--teal-50); font-weight: 600; white-space: nowrap; }
+.sysflow { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2mm; }
+.sysflow li { background: var(--teal-900); color: #fff; border-radius: 3mm; padding: 3mm; text-align: center;
+  display: flex; flex-direction: column; gap: 1mm; font-size: 8.5pt; }
+.sysflow li strong { font-size: 10pt; color: var(--amber-500); }
+.callout { background: var(--teal-50); border-left: 1.5mm solid var(--teal-600); border-radius: 2mm;
+  padding: 3mm 4mm; font-size: 9.5pt; line-height: 1.45; }
+.callout .title { font-size: 8.5pt; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--teal-900); margin-bottom: 1mm; }
+.fine { font-size: 8.5pt; line-height: 1.45; color: var(--muted); }
 `

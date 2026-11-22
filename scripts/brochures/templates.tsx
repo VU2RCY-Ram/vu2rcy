@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- printed to PDF, not served by Next */
 import * as Lucide from "lucide-react"
 import type { LucideIcon } from "lucide-react"
-import type { Brochure, BrochureIcon } from "@/lib/data/brochures"
+import type { Brochure, BrochureIcon, ManualBlock, ManualSection, SetupNetwork } from "@/lib/data/brochures"
 import type { Product } from "@/lib/data/products"
 import { CONTACT_EMAIL, SITE_URL, WHATSAPP_DISPLAY } from "@/lib/constants"
 
@@ -28,24 +28,109 @@ function Brand() {
   )
 }
 
-function Network({ b, title }: { b: Brochure; title: string }) {
-  if (!b.network) return null
+function Network({ network, title }: { network?: SetupNetwork; title: string }) {
+  if (!network) return null
   return (
     <div className="network keep">
       <div className="head">{title}</div>
       <dl>
         <dt>Wi-Fi</dt>
-        <dd>{b.network.name}</dd>
-        {b.network.password && (
+        <dd>{network.name}</dd>
+        {network.password && (
           <>
             <dt>Password</dt>
-            <dd>{b.network.password}</dd>
+            <dd>{network.password}</dd>
           </>
         )}
         <dt>Open</dt>
-        <dd>{b.network.address}</dd>
+        <dd>{network.address}</dd>
       </dl>
     </div>
+  )
+}
+
+// Renders **bold** spans inside manual text.
+function Rich({ text }: { text: string }) {
+  const parts = text.split(/\*\*(.+?)\*\*/g)
+  return <>{parts.map((t, i) => (i % 2 ? <strong key={i}>{t}</strong> : t))}</>
+}
+
+function Block({ block }: { block: ManualBlock }) {
+  switch (block.type) {
+    case "p":
+      return <p className="para"><Rich text={block.text} /></p>
+    case "h3":
+      return <h3>{block.text}</h3>
+    case "h4":
+      return <h4>{block.text}</h4>
+    case "list":
+      return (
+        <ul className="bullets">
+          {block.items.map((t) => <li key={t}><Rich text={t} /></li>)}
+        </ul>
+      )
+    case "table":
+      return (
+        <table className="keep">
+          <thead><tr>{block.head.map((h) => <th key={h}>{h}</th>)}</tr></thead>
+          <tbody>
+            {block.rows.map((r, i) => (
+              <tr key={i}>{r.map((c, j) => <td key={j}><Rich text={c} /></td>)}</tr>
+            ))}
+          </tbody>
+        </table>
+      )
+    case "network":
+      return <Network network={block.network} title="Setup Wi-Fi network" />
+    case "flow":
+      return (
+        <ol className="sysflow keep">
+          {block.steps.map((st) => (
+            <li key={st.title}><strong>{st.title}</strong><span>{st.text}</span></li>
+          ))}
+        </ol>
+      )
+    case "callout":
+      return (
+        <div className="callout keep">
+          <div className="title">{block.title}</div>
+          <Rich text={block.text} />
+        </div>
+      )
+    case "fine":
+      return <p className="fine"><Rich text={block.text} /></p>
+  }
+}
+
+// Each heading travels with the block after it, so none ends a page alone.
+function groupBlocks(blocks: ManualBlock[]) {
+  const groups: ManualBlock[][] = []
+  let pending: ManualBlock[] = []
+  for (const b of blocks) {
+    pending.push(b)
+    if (b.type !== "h3" && b.type !== "h4") {
+      groups.push(pending)
+      pending = []
+    }
+  }
+  if (pending.length) groups.push(pending)
+  return groups
+}
+
+function Section({ section }: { section: ManualSection }) {
+  const [first, ...rest] = groupBlocks(section.blocks)
+  return (
+    <section className="msec" id={`manual-${section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`}>
+      <div className="group">
+        <h2>{section.title}</h2>
+        {first?.map((b, i) => <Block block={b} key={i} />)}
+      </div>
+      {rest.map((g, i) => (
+        <div className="group" key={i}>
+          {g.map((b, j) => <Block block={b} key={j} />)}
+        </div>
+      ))}
+    </section>
   )
 }
 
@@ -148,7 +233,7 @@ export function BrochureDoc({ b, product, assets }: { b: Brochure; product: Prod
               {b.howItWorks.note && <p className="how-note">{b.howItWorks.note}</p>}
             </div>
           )}
-          <Network b={b} title="Setup Wi-Fi" />
+          <Network network={b.network} title="Setup Wi-Fi" />
         </div>
         <Contact product={product} assets={assets} lead="Interested? Message me." />
       </section>
@@ -176,14 +261,18 @@ export function ManualDoc({ b, product, assets }: { b: Brochure; product: Produc
         </div>
       </section>
 
-      <Network b={b} title="Setup Wi-Fi network" />
+      {!m.sections && <Network network={b.network} title="Setup Wi-Fi network" />}
 
-      <section id="manual-steps">
-        <h2>Setup</h2>
-        <ol className="steps">
-          {m.steps.map((s) => <li key={s}>{s}</li>)}
-        </ol>
-      </section>
+      {m.steps && (
+        <section id="manual-steps">
+          <h2>Setup</h2>
+          <ol className="steps">
+            {m.steps.map((s) => <li key={s}>{s}</li>)}
+          </ol>
+        </section>
+      )}
+
+      {m.sections?.map((sec) => <Section section={sec} key={sec.title} />)}
 
       {m.screenshot && assets.screenshot && (
         <figure className="keep" id="manual-screenshot">

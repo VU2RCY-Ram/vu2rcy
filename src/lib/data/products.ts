@@ -122,7 +122,7 @@ export const products: Product[] = [
     youtubeVideo: "",
     content: [
       "This is a ground station for TinyGS — a crowd-sourced, worldwide network of receivers that track LoRa satellites, high-altitude weather probes, and other small transmitters.",
-      "It's built from cheap, easy-to-source modules, which is really the point of TinyGS: you don't need expensive ground equipment to contribute useful tracking data. The same LoRa hardware is also handy for low-power IoT and remote sensing projects beyond satellite tracking.",
+      "That's the point of TinyGS: you don't need expensive ground equipment to contribute useful tracking data. The same station is also handy for low-power IoT and remote sensing projects beyond satellite tracking.",
     ],
   },
   {
@@ -272,7 +272,7 @@ export const products: Product[] = [
     youtubeVideo: "",
     content: [
       "This is a fixed LoRa APRS IGate: it listens for LoRa packets from other stations over RF and uploads that telemetry to the APRS internet system, so those stations show up on aprs.fi the same as with any other APRS-IS gateway.",
-      "It's built around a Heltec WiFi LoRa 32 V3 board in a compact black enclosure, with a USB-C power connector, its own on/off switch, an SMA antenna connector and a power LED.",
+      "It comes in a compact black enclosure, with a USB-C power connector, its own on/off switch, an SMA antenna connector and a power LED.",
     ],
   },
   {
@@ -332,7 +332,7 @@ export const products: Product[] = [
     isNew: true,
     addedAt: "2026-11-17",
     whatsapp: true,
-    userManual: "",
+    userManual: "/catalogue/products/manuals/master-aprs-tracker-2-manual.pdf",
     youtubeVideo: "",
     brochure: "/catalogue/products/brochures/master-aprs-tracker-2.pdf",
     content: [
@@ -356,7 +356,7 @@ export const products: Product[] = [
     isNew: true,
     addedAt: "2026-11-17",
     whatsapp: true,
-    userManual: "",
+    userManual: "/catalogue/products/manuals/master-aprs-igate-rx-manual.pdf",
     youtubeVideo: "",
     brochure: "/catalogue/products/brochures/master-aprs-igate-rx.pdf",
     content: [
