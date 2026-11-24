@@ -86,6 +86,10 @@ h2 { font-size: 12pt; font-weight: 800; color: var(--teal-900); margin-bottom: 3
 .contact .line > :last-child { overflow-wrap: anywhere; }
 .contact .line + .line { margin-top: 1.2mm; }
 .contact .line .ico { width: 4mm; height: 4mm; color: var(--teal-700); flex: none; }
+.contact.url-row { flex-wrap: wrap; row-gap: 3mm; align-content: center; }
+.contact .slug { white-space: nowrap; }
+.contact.url-row > div:not(.qr):not(.line) { flex: 1; min-width: 0; }
+.contact.url-row > .line { flex: 1 1 100%; }
 
 .note { background: var(--amber-100); border-left: 1.5mm solid var(--amber-500);
   border-radius: 2mm; padding: 3mm 4mm; font-size: 9.5pt; line-height: 1.4; }
