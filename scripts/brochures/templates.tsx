@@ -4,6 +4,7 @@ import type { LucideIcon } from "lucide-react"
 import type { Brochure, BrochureIcon, ManualBlock, ManualSection, SetupNetwork } from "@/lib/data/brochures"
 import type { Product } from "@/lib/data/products"
 import { CONTACT_EMAIL, SITE_URL, WHATSAPP_DISPLAY } from "@/lib/constants"
+import { dataUri } from "./shared"
 
 const icons = Lucide as unknown as Record<string, LucideIcon>
 
@@ -63,11 +64,16 @@ function Block({ block }: { block: ManualBlock }) {
       return <h3>{block.text}</h3>
     case "h4":
       return <h4>{block.text}</h4>
-    case "list":
+    case "list": {
+      const items = block.items.map((t) => <li key={t}><Rich text={t} /></li>)
+      return block.ordered ? <ol className="steps">{items}</ol> : <ul className="bullets">{items}</ul>
+    }
+    case "image":
       return (
-        <ul className="bullets">
-          {block.items.map((t) => <li key={t}><Rich text={t} /></li>)}
-        </ul>
+        <figure className="keep">
+          <img src={dataUri(block.src)} alt={block.caption} />
+          <figcaption>{block.caption}</figcaption>
+        </figure>
       )
     case "table":
       return (
@@ -134,10 +140,17 @@ function Section({ section }: { section: ManualSection }) {
   )
 }
 
-function Contact({ product, assets, lead }: { product: Product; assets: Assets; lead: string }) {
+// urlRow puts the product link on its own full-width row under the QR code.
+function Contact({ product, assets, lead, urlRow = false }: { product: Product; assets: Assets; lead: string; urlRow?: boolean }) {
   const host = SITE_URL.replace(/^https?:\/\//, "")
+  const url = (
+    <div className="line">
+      <span className="ico"><Icon name="Globe" /></span>
+      <span>{host}/products/<wbr /><span className="slug">{product.slug}</span></span>
+    </div>
+  )
   return (
-    <div className="contact keep">
+    <div className={urlRow ? "contact keep url-row" : "contact keep"}>
       <div className="qr" dangerouslySetInnerHTML={{ __html: assets.qrSvg }} />
       <div>
         <div className="lead">{lead}</div>
@@ -150,11 +163,9 @@ function Contact({ product, assets, lead }: { product: Product; assets: Assets; 
           <span className="ico"><Icon name="Mail" /></span>
           {CONTACT_EMAIL}
         </div>
-        <div className="line">
-          <span className="ico"><Icon name="Globe" /></span>
-          <span>{host}/products/{product.slug}</span>
-        </div>
+        {!urlRow && url}
       </div>
+      {urlRow && url}
     </div>
   )
 }
@@ -235,7 +246,7 @@ export function BrochureDoc({ b, product, assets }: { b: Brochure; product: Prod
           )}
           <Network network={b.network} title="Setup Wi-Fi" />
         </div>
-        <Contact product={product} assets={assets} lead="Interested? Message me." />
+        <Contact product={product} assets={assets} lead="Interested? Message me." urlRow />
       </section>
 
       <footer className="footer"><Brand /></footer>

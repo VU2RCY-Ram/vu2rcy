@@ -20,6 +20,7 @@ export const BROCHURE_ICONS = [
   "GraduationCap",
   "Hash",
   "House",
+  "Keyboard",
   "MapPin",
   "MessageSquareText",
   "MessagesSquare",
@@ -55,7 +56,8 @@ export type ManualBlock =
   | { type: "p"; text: string }
   | { type: "h3"; text: string }
   | { type: "h4"; text: string }
-  | { type: "list"; items: string[] }
+  | { type: "list"; items: string[]; ordered?: boolean }
+  | { type: "image"; src: string; caption: string }
   | { type: "table"; head: string[]; rows: string[][] }
   | { type: "network"; network: SetupNetwork }
   | { type: "flow"; steps: { title: string; text: string }[] }
@@ -618,6 +620,339 @@ export const brochures: Brochure[] = [
               ],
             },
             { type: "fine", text: "This manual reflects the operating features in the supplied iGate software. Radio compatibility depends on using the correct audio cable/interface and a suitable signal level." },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    slug: "master-cw-link",
+    kind: "Morse terminal for 2 m FM",
+    intro:
+      "Send and receive Morse code over an ordinary 2 m FM radio. Type to send, and read the other station as clean text.",
+    features: [
+      { icon: "MessageSquareText", title: "Automatic decoder", text: "Shows received CW as text and estimates the sender's speed." },
+      { icon: "Activity", title: "Tone tracking", text: "Locks onto any tone from 400 to 1200 Hz." },
+      { icon: "Keyboard", title: "Keyboard sending", text: "Live as you type, or a whole line at a time." },
+      { icon: "Smartphone", title: "Phone or PC control", text: "Web page over Wi-Fi. No app to install." },
+      { icon: "Hash", title: "8 memory buttons", text: "For CQ, reports and sign-offs." },
+      { icon: "BatteryFull", title: "Battery powered", text: "Charges from any 5 V USB-C charger." },
+    ],
+    highlights: [
+      { icon: "Radio", title: "2 m FM", text: "MCW over an ordinary FM transceiver." },
+      { icon: "Gauge", title: "5-40 WPM", text: "Tone 400-1200 Hz, soft keying." },
+      { icon: "Timer", title: "TX time-out", text: "Stops after 2 minutes of continuous PTT." },
+      { icon: "Monitor", title: "OLED display", text: "128 × 64, sent and received text." },
+    ],
+    network: { name: "CW-VU2RCY", password: "cw123456", address: "192.168.4.1" },
+    quickSteps: [
+      "Charge it from a 5 V USB-C charger.",
+      "With the switch at OFF, plug the radio cable into the top Transceiver jack.",
+      "Switch on and join the CW-VU2RCY Wi-Fi.",
+      "Open 192.168.4.1, enter your callsign and press Save.",
+    ],
+    // Ram's MASTER-CW LINK user manual (2026-11-24), wording kept close to his.
+    manual: {
+      subtitle: "Send and receive Morse code (CW) over an ordinary 2 m FM transceiver, from a phone or PC web page over Wi-Fi, or from a keyboard plugged into the unit.",
+      sections: [
+        {
+          title: "1. Introduction",
+          blocks: [
+            { type: "p", text: "The MASTER-CW LINK lets you send and receive Morse code (CW) over an ordinary 2 m FM transceiver. It keys the radio's PTT, sends a clean audio tone (MCW) into the microphone input, and decodes incoming CW from the speaker audio into text." },
+            { type: "p", text: "You can operate it two ways: from a phone or PC web page over Wi-Fi, or from a keyboard plugged into the unit. It runs from its internal rechargeable battery and charges from any 5 V USB-C charger. Received and sent text is shown on the built-in OLED display and on the web page." },
+            { type: "h3", text: "Main features" },
+            {
+              type: "list",
+              items: [
+                "Automatic CW decoder with speed tracking (shows the other station's approximate WPM)",
+                "Automatic tone tracking (AFC) from 400 to 1200 Hz",
+                "Keyboard sending in Live mode (each key sent as typed) or Line mode (Enter sends)",
+                "8 programmable memory buttons, saved permanently; {CALL} is replaced by your callsign",
+                "Prosigns <AR> <SK> <BT> <KN> and more",
+                "Adjustable speed 5–40 WPM, tone 400–1200 Hz, TX level, PTT lead and hang times",
+                "2-minute transmit time-out protection",
+                "Every transmission starts a new red **TX>** line, received text appears on **RX>** lines",
+                "All settings stored in memory and kept after power off",
+              ],
+            },
+          ],
+        },
+        {
+          title: "2. Getting to know the unit",
+          blocks: [
+            { type: "p", text: "The front panel has three indicators and the display. All connectors and the power switch are on the **left side**: the **top** jack goes to the radio (**Transceiver**), the **bottom** jack goes to the **Keyboard**." },
+            { type: "h3", text: "Front panel" },
+            { type: "image", src: "/catalogue/products/master-cw-link.jpg", caption: "Front panel" },
+            {
+              type: "table",
+              head: ["Part", "Meaning"],
+              rows: [
+                ["Tx LED (amber)", "Lights while the radio is keyed (transmitting)"],
+                ["Rx LED (green)", "Lights while a CW tone is being received"],
+                ["PWR LED (red)", "Unit is switched on"],
+                ["Display", "See the display layout below"],
+              ],
+            },
+            { type: "h3", text: "Left side panel (top to bottom)" },
+            { type: "image", src: "/catalogue/products/master-cw-link-side.jpg", caption: "Left side panel" },
+            {
+              type: "table",
+              head: ["Part", "Label", "Use"],
+              rows: [
+                ["Slide switch", "ON / OFF", "Switches the unit on and off"],
+                ["Top jack", "Transceiver", "Radio interface cable to your 2 m FM transceiver: speaker audio in, microphone audio out, PTT, ground"],
+                ["Bottom jack", "Keyboard", "Keyboard cable"],
+                ["Indicator", "CHARGING", "Lights while the internal battery is charging"],
+                ["USB-C socket", "DC 5V", "Charging from a 5 V USB charger"],
+              ],
+            },
+            { type: "h3", text: "Display layout" },
+            {
+              type: "table",
+              head: ["Line", "Shows", "Example"],
+              rows: [
+                ["1", "Your callsign, sending speed, tone", "VU2RCY 25w 800Hz"],
+                ["2", "Web address of the unit, speed of the received station", "192.168.4.1 ~25w"],
+                ["3", "Bar graph of received tone strength", "—"],
+                ["4–5", "Latest received and sent text", "CALL VU2RCY | RX ~25"],
+                ["6", "Text you are typing or still waiting to be sent (> = Live mode, : = Line mode)", ">"],
+              ],
+            },
+            { type: "p", text: "At switch-on the Tx and Rx LEDs light for half a second as a lamp test." },
+            { type: "h3", text: "Cautions" },
+            {
+              type: "list",
+              items: [
+                "Plug or unplug the keyboard only with the unit switched off.",
+                "Check that the Transceiver cable is wired for your radio model before transmitting.",
+                "Do not swap the two jacks: the top one is always the Transceiver, the bottom one always the Keyboard.",
+              ],
+            },
+          ],
+        },
+        {
+          title: "3. Getting started",
+          blocks: [
+            { type: "network", network: { name: "CW-VU2RCY", password: "cw123456", address: "http://192.168.4.1" } },
+            {
+              type: "list",
+              ordered: true,
+              items: [
+                "Charge the unit fully before first use: connect a 5 V USB-C charger to the **DC 5V** socket. The **CHARGING** light shows charging is in progress.",
+                "With the switch at OFF, plug the radio cable into the top **Transceiver** jack and the keyboard into the bottom **Keyboard** jack.",
+                "Set the radio to the 2 m FM simplex frequency you will use, with a medium volume.",
+                "Slide the switch to **ON**. The red **PWR** LED lights and the display shows the start-up screen, then your callsign.",
+                "On your phone or PC, join the Wi-Fi network **CW-VU2RCY**, password **cw123456**.",
+                "Open a browser at **http://192.168.4.1**. The control page appears.",
+                "Enter your callsign under **Settings** and press **Save**.",
+                "Press **TUNE 10s** and adjust **TX level** until the transmitted tone sounds clean on a second receiver.",
+                "Listen to a CW signal. The green **Rx** LED lights with each tone and the decoded text appears on **RX>** lines.",
+              ],
+            },
+            { type: "p", text: "**Using your home Wi-Fi (optional):** enter your home network name and password under Settings, press Save, then Reboot. The unit stays reachable on its own network and also joins your home network. The display then shows the home IP address; you can also use **http://cw.local**." },
+          ],
+        },
+        {
+          title: "4. Web control page",
+          blocks: [
+            { type: "p", text: "The web page has three panels: the live text window, the sending panel and Settings." },
+            { type: "h3", text: "Live text window" },
+            {
+              type: "list",
+              items: [
+                "**RX / TX** pill: turns red **TX** while transmitting.",
+                "**TONE / no tone** pill: turns green while a CW tone is detected.",
+                "Info line: received level, detected tone frequency (Hz) and the other station's speed (WPM).",
+                "Signal bar: strength of the received tone.",
+                "Text window: sent text on red **TX>** lines, received text on **RX>** lines. **Clear** empties the window.",
+                "“to send:” shows text still waiting in the send queue.",
+              ],
+            },
+            { type: "h3", text: "Sending panel" },
+            {
+              type: "list",
+              items: [
+                "Type in the box and press **Enter** to send the line.",
+                "Tick **Live typing** to send each character as you type; Enter then sends a word space.",
+                "**Esc** or **STOP** cancels everything still waiting to be sent.",
+                "**TUNE 10s** sends a steady tone for 10 seconds, for level setting.",
+                "**Memory buttons M1–M8**: click to send. See section 6.",
+              ],
+            },
+          ],
+        },
+        {
+          title: "5. Keyboard operation",
+          blocks: [
+            { type: "p", text: "A keyboard on the bottom **Keyboard** jack lets you operate without a phone or PC. The bottom line of the display shows what you are typing: **>** in Live mode (text waiting to be sent), **:** in Line mode (text being typed)." },
+            {
+              type: "list",
+              items: [
+                "**Live mode:** each key is sent as you type it. Enter sends a word space.",
+                "**Line mode:** type a whole line, then press Enter to send it. A line starting with **/** is a command (section 8).",
+                "Type prosigns with angle brackets, for example <AR> (Shift + comma, A, R, Shift + full stop).",
+              ],
+            },
+            {
+              type: "table",
+              head: ["Key", "Function"],
+              rows: [
+                ["Letters, numbers, punctuation", "Sent in Morse"],
+                ["Enter", "Send line (Line mode) / word space (Live mode)"],
+                ["Backspace or Delete", "Remove the last character not yet sent"],
+                ["Esc", "STOP – cancel all unsent text"],
+                ["F1 – F7", "Send memories M1 – M7"],
+                ["Shift + F1", "Send memory M8"],
+                ["F8", "Switch Live / Line mode"],
+                ["F9", "Speed – 1 WPM"],
+                ["F10", "Speed + 1 WPM"],
+                ["F11", "Tone – 50 Hz"],
+                ["Shift + F11", "Tone + 50 Hz"],
+                ["F12", "Save settings"],
+              ],
+            },
+            { type: "p", text: "Changes made with F8–F11 are lost at power off unless you press **F12** to save." },
+          ],
+        },
+        {
+          title: "6. Memory buttons",
+          blocks: [
+            { type: "p", text: "Eight memories hold ready-made messages of up to 99 characters. {CALL} inside a memory is replaced by your callsign when sent." },
+            {
+              type: "table",
+              head: ["Memory", "Default label", "Default text"],
+              rows: [
+                ["M1", "CQ", "CQ CQ CQ DE {CALL} {CALL} {CALL} K"],
+                ["M2", "QRZ?", "QRZ? DE {CALL} K"],
+                ["M3", "5NN", "UR 5NN 5NN"],
+                ["M4", "AR", "<AR>"],
+                ["M5", "KN", "<KN>"],
+                ["M6", "73 SK", "TU 73 <SK>"],
+                ["M7", "DE", "DE {CALL}"],
+                ["M8", "M8", "(empty)"],
+              ],
+            },
+            { type: "p", text: "**To edit a memory:** on the web page, right-click the button (PC) or press and hold it (phone). Change the label and text, then press **Save**. **Clear** empties both fields. Memories are saved permanently at once." },
+          ],
+        },
+        {
+          title: "7. Settings",
+          blocks: [
+            { type: "p", text: "Open the Settings panel on the web page, change values, and press **Save**. Settings are stored permanently. Wi-Fi changes take effect after **Reboot**." },
+            {
+              type: "table",
+              head: ["Setting", "Range", "Default", "Purpose"],
+              rows: [
+                ["Callsign", "up to 11 characters", "VU2RCY", "Used in {CALL} and /CQ"],
+                ["Speed (WPM)", "5 – 40", "18", "Sending speed"],
+                ["Tone Hz", "400 – 1200", "800", "Transmitted tone and sidetone"],
+                ["RX auto tone (AFC)", "ON / OFF", "ON", "ON: decodes any tone 400–1200 Hz. OFF: only your set tone"],
+                ["Key mode", "Straight / Iambic A / Iambic B", "Iambic B", "For the optional Morse key or paddle"],
+                ["Swap paddles", "No / Yes", "No", "Exchanges dit and dah"],
+                ["PTT lead ms", "0 – 1000", "300", "Delay from PTT on to first tone, lets the radio settle"],
+                ["PTT hang ms", "0 – 5000", "600", "Time PTT stays on after the last tone"],
+                ["TX level", "10 – 127", "90", "Audio level into the radio microphone"],
+                ["RX min level", "0 – 500", "20", "Ignores received audio below this level (noise)"],
+                ["PS/2 keyboard", "Live / Line", "Live", "Keyboard sending mode"],
+                ["Radio SQL pin", "Ignore / Low = open / High = open", "Ignore", "Uses the radio's squelch line to block noise"],
+                ["Home Wi-Fi SSID / password", "—", "blank", "Join your home network"],
+                ["Wi-Fi name (this unit)", "up to 32 characters", "CW-VU2RCY", "Name of the unit's own network"],
+                ["AP password", "8+ characters", "cw123456", "Password of the unit's own network"],
+              ],
+            },
+            { type: "p", text: "**Factory default** resets all settings and memories and restarts the unit. Afterwards, reconnect to **CW-VU2RCY** with password **cw123456**." },
+          ],
+        },
+        {
+          title: "8. Commands",
+          blocks: [
+            { type: "p", text: "Type these in the web send box, or on the keyboard in Line mode. Commands are not case-sensitive." },
+            {
+              type: "table",
+              head: ["Command", "Action"],
+              rows: [
+                ["/HELP", "Show the command list"],
+                ["/STATUS", "Show all current settings and IP address"],
+                ["/WPM n", "Speed 5–40"],
+                ["/TONE n", "Tone 400–1200 Hz"],
+                ["/AFC ON or OFF", "Automatic RX tone tracking"],
+                ["/MODE S, A or B", "Straight key, Iambic A, Iambic B"],
+                ["/SWAP", "Swap paddles"],
+                ["/LEAD ms, /HANG ms", "PTT lead and hang times"],
+                ["/LEVEL n", "TX level 10–127"],
+                ["/SQL n", "RX minimum level 0–500"],
+                ["/SQLPIN 0, 1 or 2", "Ignore / Low = open / High = open"],
+                ["/CALL xxx", "Set callsign"],
+                ["/CQ", "Send a standard CQ call"],
+                ["/M1 … /M8", "Send a memory"],
+                ["/TUNE s", "Steady tone for 1–60 seconds (default 10)"],
+                ["/DEBUG", "Show live receive measurements twice a second"],
+                ["/STOP", "Cancel sending"],
+                ["/SAVE", "Save settings permanently"],
+                ["/DEFAULT", "Factory default and restart"],
+              ],
+            },
+            { type: "p", text: "Settings changed by command are lost at power off unless you use **/SAVE** (or F12, or Save on the web page)." },
+          ],
+        },
+        {
+          title: "9. Protection and behaviour",
+          blocks: [
+            {
+              type: "list",
+              items: [
+                "**Time-out:** transmission stops automatically after 2 minutes of continuous PTT. Release the key and clear the queue to transmit again.",
+                "**Key priority:** touching the Morse key or paddle while text is sending cancels the remaining text.",
+                "**New TX line:** each new transmission starts a fresh red TX> line, so your messages are easy to find.",
+                "The decoder pauses during transmit and resumes after PTT releases.",
+              ],
+            },
+          ],
+        },
+        {
+          title: "10. Troubleshooting",
+          blocks: [
+            {
+              type: "table",
+              head: ["Problem", "Check"],
+              rows: [
+                ["Cannot find the Wi-Fi network", "Wait 10 seconds after power on. If the name or password was changed, type /DEFAULT on the keyboard in Line mode and press Enter."],
+                ["Page does not open", "Use http://192.168.4.1 while joined to the unit's network. Turn off mobile data on the phone."],
+                ["No decoding, green LED never lights", "Raise radio volume. Lower RX min level. Check AFC is ON. Set Radio SQL pin to Ignore."],
+                ["Random letters from noise", "Raise RX min level, or use the Radio SQL pin setting."],
+                ["First character cut off on air", "Increase PTT lead time."],
+                ["PTT drops between words", "Increase PTT hang time."],
+                ["Distorted transmitted tone", "Lower TX level."],
+                ["Keyboard does nothing", "Switch off, push the keyboard plug fully into the bottom Keyboard jack, switch on."],
+                ["“TX buffer full”", "Wait for the queue to send, or press STOP."],
+                ["“TX time-out”", "Release the key; transmission was over 2 minutes."],
+                ["PWR LED does not light", "Check the ON/OFF switch. Charge the battery from the DC 5V socket."],
+              ],
+            },
+          ],
+        },
+        {
+          title: "11. Specifications",
+          blocks: [
+            {
+              type: "table",
+              head: ["Item", "Value"],
+              rows: [
+                ["Mode", "MCW (tone-keyed CW) over 2 m FM"],
+                ["Sending speed", "5 – 40 WPM"],
+                ["Tone", "400 – 1200 Hz, 5 ms soft keying edges"],
+                ["Receive tone tracking", "400 – 1200 Hz in 100 Hz steps"],
+                ["Transmit time-out", "2 minutes"],
+                ["Memories", "8 × 99 characters"],
+                ["Send queue", "about 1000 characters"],
+                ["Control", "Wi-Fi web page, keyboard"],
+                ["Connectors", "Transceiver jack, Keyboard jack, DC 5V USB-C"],
+                ["Indicators", "Tx, Rx, PWR, CHARGING"],
+                ["Display", "128 × 64 OLED"],
+                ["Power", "Internal rechargeable battery, charged at 5 V via USB-C"],
+                ["Default Wi-Fi", "CW-VU2RCY, password cw123456, http://192.168.4.1"],
+              ],
+            },
           ],
         },
       ],

@@ -4,13 +4,13 @@ import { NewspaperIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductGrid } from "@/components/products/product-grid";
 import { ALL_BROCHURES_PDF } from "@/lib/data/brochures";
-import { getNewProducts, products } from "@/lib/data/products";
+import { cables, getNewProducts, kits } from "@/lib/data/products";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Products",
   description:
-    "Amateur radio kits I build and offer: APRS trackers, MMDVM, LoRa ground stations and more.",
+    "Amateur radio kits and cables I build and offer: APRS trackers, MMDVM, LoRa ground stations and more.",
 });
 
 export default function ProductsPage() {
@@ -26,7 +26,7 @@ export default function ProductsPage() {
         <div>
           <h1 className="text-3xl font-semibold tracking-tight">Products</h1>
           <p className="mt-2 text-muted-foreground">
-            {products.length} kits I build and offer. Get in touch to ask about
+            {kits.length} kits I build and offer. Get in touch to ask about
             building one.
           </p>
         </div>
@@ -49,6 +49,14 @@ export default function ProductsPage() {
       </div>
 
       <ProductGrid products={getNewProducts()} />
+
+      <section id="cables" className="mt-10 scroll-mt-20 sm:mt-12">
+        <h2 className="text-2xl font-semibold tracking-tight">Cables</h2>
+        <p className="mt-1 mb-4 text-sm text-muted-foreground">
+          {cables.length} cables I make and offer.
+        </p>
+        <ProductGrid id="cables-grid" products={getNewProducts(cables)} />
+      </section>
     </div>
   );
 }

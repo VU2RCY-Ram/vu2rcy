@@ -1,6 +1,6 @@
 import { getProductBySlug, type Product } from "./products"
 
-// Kits on Ram's HFI 2026 poster (2026-11-22) in its order, then MASTER-APRS PRO.
+// Ram's HFI 2026 poster kits in order, then MASTER-APRS PRO and MASTER-CW LINK.
 // Dates and venue confirmed by Ram 2026-11-17; no stall number was given.
 export const hamfestKits = {
   event: "Hamfest India 2026",
@@ -17,16 +17,21 @@ export const hamfestKits = {
     "master-aprs-tracker-2",
     "master-aprs-tracker-3",
     "master-aprs-pro-2",
+    "master-cw-link",
   ],
+  cableSlugs: ["aprs-cable", "cw-cable", "sstv-cable"],
 }
 
-export function getHamfestKits(): Product[] {
-  return hamfestKits.slugs.map((slug) => {
+function bySlugs(slugs: string[]): Product[] {
+  return slugs.map((slug) => {
     const product = getProductBySlug(slug)
     if (!product) throw new Error(`hamfest-kits: no product with slug ${slug}`)
     return product
   })
 }
+
+export const getHamfestKits = () => bySlugs(hamfestKits.slugs)
+export const getHamfestCables = () => bySlugs(hamfestKits.cableSlugs)
 
 export function isHamfestKitsLive(now = new Date()) {
   return now.getTime() < new Date(hamfestKits.endsAt).getTime()
