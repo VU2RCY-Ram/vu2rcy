@@ -17,6 +17,9 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    // Resize through wsrv.nl instead of Vercel (Hobby plan limit, see the loader).
+    loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts",
     remotePatterns: [
       // Award certificate images live in the operator's public
       // VU2RCY-Ram/Awards GitHub repo (see src/lib/data/awards.ts) — hosted
