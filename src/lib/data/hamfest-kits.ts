@@ -19,15 +19,19 @@ export const hamfestKits = {
     "master-aprs-pro-2",
     "master-cw-link",
   ],
+  cableSlugs: ["aprs-cable", "cw-cable", "sstv-cable"],
 }
 
-export function getHamfestKits(): Product[] {
-  return hamfestKits.slugs.map((slug) => {
+function bySlugs(slugs: string[]): Product[] {
+  return slugs.map((slug) => {
     const product = getProductBySlug(slug)
     if (!product) throw new Error(`hamfest-kits: no product with slug ${slug}`)
     return product
   })
 }
+
+export const getHamfestKits = () => bySlugs(hamfestKits.slugs)
+export const getHamfestCables = () => bySlugs(hamfestKits.cableSlugs)
 
 export function isHamfestKitsLive(now = new Date()) {
   return now.getTime() < new Date(hamfestKits.endsAt).getTime()

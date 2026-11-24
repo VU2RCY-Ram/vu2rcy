@@ -12,7 +12,12 @@ import {
 import { ComingSoonTrigger } from "@/components/products/coming-soon-trigger"
 import { ProductImage } from "@/components/products/product-image"
 import { WHATSAPP_LINK } from "@/lib/constants"
-import { getHamfestKits, hamfestKits, isHamfestKitsLive } from "@/lib/data/hamfest-kits"
+import {
+  getHamfestCables,
+  getHamfestKits,
+  hamfestKits,
+  isHamfestKitsLive,
+} from "@/lib/data/hamfest-kits"
 import type { Product } from "@/lib/data/products"
 
 const whatsappText = `Hi, I'll be at ${hamfestKits.event} and would like to see your kits.`
@@ -46,10 +51,69 @@ function KitThumb({ product }: { product: Product }) {
   )
 }
 
+// One labelled strip; swipes on mobile, arrows from sm up.
+function ThumbRow({
+  id,
+  label,
+  noun,
+  items,
+  viewAllHref,
+}: {
+  id: string
+  label: string
+  noun: string
+  items: Product[]
+  viewAllHref?: string
+}) {
+  return (
+    <div id={id}>
+      <div className="mb-2 flex items-center justify-between gap-2 sm:mx-12">
+        <div className="flex items-baseline gap-3">
+          <h3 className="text-sm font-semibold">{label}</h3>
+          {viewAllHref && (
+            <Link
+              id={`${id}-view-all`}
+              href={viewAllHref}
+              className="inline-flex items-center gap-1 text-xs font-medium whitespace-nowrap text-primary hover:underline"
+            >
+              View all {noun}
+              <ArrowRightIcon className="size-3.5" aria-hidden />
+            </Link>
+          )}
+        </div>
+        {/* Mobile only; a row with its own link has no room for it. */}
+        {!viewAllHref && (
+          <p id={`${id}-swipe-hint`} className="flex items-center gap-1 text-xs text-muted-foreground sm:hidden">
+            Swipe to see all {items.length} {noun}
+            <ArrowRightIcon className="size-3.5" aria-hidden />
+          </p>
+        )}
+      </div>
+      <Carousel opts={{ align: "start" }} className="sm:mx-12">
+        <CarouselContent>
+          {items.map((product) => (
+            <CarouselItem key={product.slug} className="basis-[42%] sm:basis-1/3 lg:basis-1/4">
+              <KitThumb product={product} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        {/* 3 or fewer fit on one line from sm up, so no arrows. */}
+        {items.length > 3 && (
+          <>
+            <CarouselPrevious className="hidden sm:flex" />
+            <CarouselNext className="hidden sm:flex" />
+          </>
+        )}
+      </Carousel>
+    </div>
+  )
+}
+
 // Home card for Hamfest India 2026; renders nothing after the event ends.
 export function HamfestKits() {
   if (!isHamfestKitsLive()) return null
   const kits = getHamfestKits()
+  const cables = getHamfestCables()
 
   return (
     <section id="hamfest-kits" className="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-12">
@@ -73,7 +137,7 @@ export function HamfestKits() {
               </span>
             </p>
             <p className="max-w-xl text-sm">
-              I&apos;m bringing these kits for live demos. Drop by for a
+              I&apos;m bringing these kits and cables for live demos. Drop by for a
               hands-on look, or message me before the event.
             </p>
           </div>
@@ -108,22 +172,17 @@ export function HamfestKits() {
           </div>
         </div>
 
-        <div id="hamfest-kits-peek" className="border-t bg-background px-5 py-4 sm:px-8">
-          <p id="hamfest-kits-swipe-hint" className="mb-2 flex items-center gap-1 text-xs text-muted-foreground sm:hidden">
-            Swipe to see all {kits.length} kits
-            <ArrowRightIcon className="size-3.5" aria-hidden />
-          </p>
-          <Carousel opts={{ align: "start" }} className="sm:mx-12">
-            <CarouselContent>
-              {kits.map((product) => (
-                <CarouselItem key={product.slug} className="basis-[42%] sm:basis-1/3 lg:basis-1/4">
-                  <KitThumb product={product} />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="hidden sm:flex" />
-            <CarouselNext className="hidden sm:flex" />
-          </Carousel>
+        <div id="hamfest-kits-peek" className="space-y-5 border-t bg-background px-5 py-4 sm:px-8">
+          <ThumbRow id="hamfest-kits-kits" label="Kits" noun="kits" items={kits} />
+          {cables.length > 0 && (
+            <ThumbRow
+              id="hamfest-kits-cables"
+              label="Cables"
+              noun="cables"
+              items={cables}
+              viewAllHref="/products#cables"
+            />
+          )}
         </div>
       </div>
     </section>
