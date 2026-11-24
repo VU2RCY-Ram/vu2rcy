@@ -35,6 +35,9 @@ export type Product = {
   // Listed by name only until Ram sends details: no detail page, the card
   // shows a "details coming soon" toast instead.
   comingSoon?: boolean
+  // Cables list in their own /products section; same fields as kits, so a
+  // cable can gain a brochure, manual or detail page later.
+  kind?: "kit" | "cable"
 }
 
 // Ported from the legacy vu2rcy.com site's /products accordion — the kits
@@ -413,7 +416,48 @@ export const products: Product[] = [
       "Speed goes from 5 to 40 WPM and the tone from 400 to 1200 Hz, and the receiver follows the other station's tone across that range on its own. Transmission stops on its own after 2 minutes of continuous PTT. It runs on an internal rechargeable battery and charges from any 5 V USB-C charger.",
     ],
   },
+  // Cables: names from Ram's photo filenames (2026-11-24), no details yet.
+  {
+    slug: "aprs-cable",
+    name: "APRS Cable",
+    tagline: "Details coming soon.",
+    image: "/catalogue/cables/aprs-cable.jpg",
+    kind: "cable",
+    isNew: true,
+    addedAt: "2026-11-24",
+    comingSoon: true,
+    userManual: "",
+    youtubeVideo: "",
+  },
+  {
+    slug: "cw-cable",
+    name: "CW Cable",
+    tagline: "DB-9 to 6.5 mm. Details coming soon.",
+    image: "/catalogue/cables/cw-cable.jpg",
+    kind: "cable",
+    isNew: true,
+    addedAt: "2026-11-24",
+    comingSoon: true,
+    userManual: "",
+    youtubeVideo: "",
+  },
+  {
+    slug: "sstv-cable",
+    name: "SSTV Cable",
+    // From Ram's in-use photos: Wouxun handheld to a phone running an SSTV app.
+    tagline: "Connects a handheld radio to a phone for SSTV. Details coming soon.",
+    image: "/catalogue/cables/sstv-cable.jpg",
+    kind: "cable",
+    isNew: true,
+    addedAt: "2026-11-24",
+    comingSoon: true,
+    userManual: "",
+    youtubeVideo: "",
+  },
 ]
+
+export const kits = products.filter((p) => p.kind !== "cable")
+export const cables = products.filter((p) => p.kind === "cable")
 
 export function getProductBySlug(slug: string) {
   return products.find((product) => product.slug === slug)
@@ -424,8 +468,8 @@ export function getProductBySlug(slug: string) {
 // Kits with a detail page; coming-soon ones have none yet.
 export const detailProducts = products.filter((p) => !p.comingSoon)
 
-export function getNewProducts() {
-  return [...products].sort((a, b) => {
+export function getNewProducts(list: Product[] = kits) {
+  return [...list].sort((a, b) => {
     if (!a.comingSoon && b.comingSoon) return -1
     if (a.comingSoon && !b.comingSoon) return 1
     if (a.brochure && !b.brochure) return -1
