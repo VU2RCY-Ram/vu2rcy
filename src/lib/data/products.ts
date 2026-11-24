@@ -386,6 +386,33 @@ export const products: Product[] = [
     userManual: "",
     youtubeVideo: "",
   },
+  {
+    // Facts from Ram's manual and brochure (2026-11-24). Key/paddle input left
+    // out until Ram says where it plugs in.
+    slug: "master-cw-link",
+    name: "MASTER-CW LINK",
+    tagline:
+      "Send and receive Morse code over any 2 m FM radio, from your phone, PC or a keyboard.",
+    image: "/catalogue/products/master-cw-link.jpg",
+    detailImage: "/catalogue/products/master-cw-link-radio.jpg",
+    gallery: [
+      "/catalogue/products/master-cw-link.jpg",
+      "/catalogue/products/master-cw-link-radio.jpg",
+      "/catalogue/products/master-cw-link-side.jpg",
+      "/catalogue/products/master-cw-link-pair.jpg",
+    ],
+    isNew: true,
+    addedAt: "2026-11-24",
+    whatsapp: true,
+    userManual: "/catalogue/products/manuals/master-cw-link-manual.pdf",
+    brochure: "/catalogue/products/brochures/master-cw-link.pdf",
+    youtubeVideo: "",
+    content: [
+      "This is my MASTER-CW LINK. It lets you work Morse code over an ordinary 2 m FM radio. It keys the radio's PTT, sends a clean audio tone into the mic input, and decodes the CW coming out of the speaker into text, along with the other station's approximate speed.",
+      "You can run it from a web page on your phone or PC over its own Wi-Fi, with no app to install, or from a keyboard plugged into the unit. Type a whole line and press Enter, or send each character as you type. Eight memory buttons hold your CQ, reports and sign-offs, and sent and received text shows on the built-in OLED and the web page.",
+      "Speed goes from 5 to 40 WPM and the tone from 400 to 1200 Hz, and the receiver follows the other station's tone across that range on its own. Transmission stops on its own after 2 minutes of continuous PTT. It runs on an internal rechargeable battery and charges from any 5 V USB-C charger.",
+    ],
+  },
 ]
 
 export function getProductBySlug(slug: string) {

@@ -1,6 +1,6 @@
 import { getProductBySlug, type Product } from "./products"
 
-// Kits on Ram's HFI 2026 poster (2026-11-22) in its order, then MASTER-APRS PRO.
+// Ram's HFI 2026 poster kits in order, then MASTER-APRS PRO and MASTER-CW LINK.
 // Dates and venue confirmed by Ram 2026-11-17; no stall number was given.
 export const hamfestKits = {
   event: "Hamfest India 2026",
@@ -17,6 +17,7 @@ export const hamfestKits = {
     "master-aprs-tracker-2",
     "master-aprs-tracker-3",
     "master-aprs-pro-2",
+    "master-cw-link",
   ],
 }
 
