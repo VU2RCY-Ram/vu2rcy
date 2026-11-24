@@ -4,6 +4,7 @@ import type { LucideIcon } from "lucide-react"
 import type { Brochure, BrochureIcon, ManualBlock, ManualSection, SetupNetwork } from "@/lib/data/brochures"
 import type { Product } from "@/lib/data/products"
 import { CONTACT_EMAIL, SITE_URL, WHATSAPP_DISPLAY } from "@/lib/constants"
+import { dataUri } from "./shared"
 
 const icons = Lucide as unknown as Record<string, LucideIcon>
 
@@ -63,11 +64,16 @@ function Block({ block }: { block: ManualBlock }) {
       return <h3>{block.text}</h3>
     case "h4":
       return <h4>{block.text}</h4>
-    case "list":
+    case "list": {
+      const items = block.items.map((t) => <li key={t}><Rich text={t} /></li>)
+      return block.ordered ? <ol className="steps">{items}</ol> : <ul className="bullets">{items}</ul>
+    }
+    case "image":
       return (
-        <ul className="bullets">
-          {block.items.map((t) => <li key={t}><Rich text={t} /></li>)}
-        </ul>
+        <figure className="keep">
+          <img src={dataUri(block.src)} alt={block.caption} />
+          <figcaption>{block.caption}</figcaption>
+        </figure>
       )
     case "table":
       return (

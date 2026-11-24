@@ -55,7 +55,8 @@ export type ManualBlock =
   | { type: "p"; text: string }
   | { type: "h3"; text: string }
   | { type: "h4"; text: string }
-  | { type: "list"; items: string[] }
+  | { type: "list"; items: string[]; ordered?: boolean }
+  | { type: "image"; src: string; caption: string }
   | { type: "table"; head: string[]; rows: string[][] }
   | { type: "network"; network: SetupNetwork }
   | { type: "flow"; steps: { title: string; text: string }[] }
