@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { NewspaperIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { AppCard } from "@/components/products/app-card";
 import { ProductGrid } from "@/components/products/product-grid";
+import { apps } from "@/lib/data/apps";
 import { ALL_BROCHURES_PDF } from "@/lib/data/brochures";
 import { cables, getNewProducts, kits } from "@/lib/data/products";
 import { pageMetadata } from "@/lib/seo";
@@ -56,6 +58,21 @@ export default function ProductsPage() {
           {cables.length} cables I make and offer.
         </p>
         <ProductGrid id="cables-grid" products={getNewProducts(cables)} />
+      </section>
+
+      <section id="apps" className="mt-10 scroll-mt-20 sm:mt-12">
+        <h2 className="text-2xl font-semibold tracking-tight">Apps</h2>
+        <p className="mt-1 mb-4 text-sm text-muted-foreground">
+          Phone apps that work with my kits: two I made, and two others.
+        </p>
+        <div
+          id="apps-grid"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+        >
+          {apps.map((app) => (
+            <AppCard key={app.slug} app={app} />
+          ))}
+        </div>
       </section>
     </div>
   );
