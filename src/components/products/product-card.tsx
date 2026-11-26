@@ -17,7 +17,19 @@ import type { Product } from "@/lib/data/products"
 export function ProductCard({ product }: { product: Product }) {
   return (
     <Card className="h-full pt-0 transition-shadow hover:shadow-md hover:shadow-primary/10">
-      <ProductImage src={product.image} alt={product.name} />
+      {/* No detail page yet, so the photo opens the coming-soon pop-up. */}
+      {product.comingSoon ? (
+        <ComingSoonTrigger
+          name={product.name}
+          image={product.image}
+          video={product.youtubeVideo}
+          className="block w-full cursor-zoom-in"
+        >
+          <ProductImage src={product.image} alt={product.name} />
+        </ComingSoonTrigger>
+      ) : (
+        <ProductImage src={product.image} alt={product.name} />
+      )}
       <CardHeader>
         {product.isNew && (
           <div className="flex justify-end">
@@ -30,6 +42,8 @@ export function ProductCard({ product }: { product: Product }) {
           {product.comingSoon ? (
             <ComingSoonTrigger
               name={product.name}
+              image={product.image}
+              video={product.youtubeVideo}
               className="hover:text-primary hover:underline"
             >
               {product.name}
@@ -70,6 +84,8 @@ export function ProductCard({ product }: { product: Product }) {
         {product.comingSoon ? (
           <ComingSoonTrigger
             name={product.name}
+            image={product.image}
+            video={product.youtubeVideo}
             className="text-sm font-medium text-primary hover:underline"
           >
             View details

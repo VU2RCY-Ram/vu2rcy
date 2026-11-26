@@ -39,7 +39,12 @@ function KitThumb({ product }: { product: Product }) {
   const box = "group block w-full overflow-hidden rounded-lg border bg-background"
   if (product.comingSoon) {
     return (
-      <ComingSoonTrigger name={product.name} className={box}>
+      <ComingSoonTrigger
+        name={product.name}
+        image={product.image}
+        video={product.youtubeVideo}
+        className={box}
+      >
         {body}
       </ComingSoonTrigger>
     )
