@@ -387,7 +387,7 @@ export const products: Product[] = [
     addedAt: "2026-11-16",
     comingSoon: true,
     userManual: "",
-    youtubeVideo: "",
+    youtubeVideo: "https://www.youtube.com/watch?v=wvs0nhbiTUU",
   },
   {
     // Facts from Ram's manual and brochure (2026-11-24). Key/paddle input left
@@ -409,7 +409,7 @@ export const products: Product[] = [
     whatsapp: true,
     userManual: "/catalogue/products/manuals/master-cw-link-manual.pdf",
     brochure: "/catalogue/products/brochures/master-cw-link.pdf",
-    youtubeVideo: "",
+    youtubeVideo: "https://www.youtube.com/watch?v=nmuwwrPoZQI",
     content: [
       "This is my MASTER-CW LINK. It lets you work Morse code over an ordinary 2 m FM radio. It keys the radio's PTT, sends a clean audio tone into the mic input, and decodes the CW coming out of the speaker into text, along with the other station's approximate speed.",
       "You can run it from a web page on your phone or PC over its own Wi-Fi, with no app to install, or from a keyboard plugged into the unit. Type a whole line and press Enter, or send each character as you type. Eight memory buttons hold your CQ, reports and sign-offs, and sent and received text shows on the built-in OLED and the web page.",
