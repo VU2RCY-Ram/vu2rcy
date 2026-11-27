@@ -1,5 +1,12 @@
+import Image from "next/image"
 import Link from "next/link"
-import { ArrowRightIcon, CalendarDaysIcon, MapPinIcon, MessageCircleIcon } from "lucide-react"
+import {
+  ArrowRightIcon,
+  CalendarDaysIcon,
+  ClipboardListIcon,
+  MapPinIcon,
+  MessageCircleIcon,
+} from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -177,7 +184,41 @@ export function HamfestKits() {
           </div>
         </div>
 
-        <div id="hamfest-kits-peek" className="space-y-5 border-t bg-background px-5 py-4 sm:px-8">
+        <div
+          id="hamfest-kits-enquiry"
+          className="flex items-center gap-4 border-t px-5 py-4 sm:gap-6 sm:px-8"
+        >
+          {/* unoptimized: an SVG needs no resizing, so skip the wsrv.nl loader. */}
+          <Image
+            src="/hamfest/kit-enquiry-qr.svg"
+            alt="QR code for my kit enquiry form"
+            width={112}
+            height={112}
+            unoptimized
+            className="size-24 shrink-0 rounded-md border bg-white sm:size-28"
+          />
+          <div className="flex flex-col items-start gap-2">
+            <h3 className="text-base font-semibold">Want one of these kits?</h3>
+            <p className="text-sm text-muted-foreground">
+              Scan the code or open my enquiry form, tick the kits you want, and
+              I&apos;ll get back to you in a few days.
+            </p>
+            <Button
+              id="hamfest-kits-enquiry-form"
+              variant="outline"
+              nativeButton={false}
+              render={
+                <a href={hamfestKits.enquiryFormUrl} target="_blank" rel="noopener noreferrer" />
+              }
+              className="h-11 px-4"
+            >
+              <ClipboardListIcon />
+              Open the enquiry form
+            </Button>
+          </div>
+        </div>
+
+        <div id="hamfest-kits-peek"className="space-y-5 border-t bg-background px-5 py-4 sm:px-8">
           <ThumbRow id="hamfest-kits-kits" label="Kits" noun="kits" items={kits} />
           {cables.length > 0 && (
             <ThumbRow
