@@ -16,6 +16,7 @@ export const BROCHURE_ICONS = [
   "Factory",
   "FlaskConical",
   "Gauge",
+  "Gift",
   "Globe",
   "GraduationCap",
   "Hash",
@@ -32,6 +33,7 @@ export const BROCHURE_ICONS = [
   "ShieldCheck",
   "Siren",
   "Smartphone",
+  "Sun",
   "Tent",
   "Timer",
   "Usb",
@@ -272,6 +274,32 @@ export const brochures: Brochure[] = [
       ],
       note: "To switch it to a different Wi-Fi network later, power-cycle the clock and repeat these steps.",
     },
+  },
+  // From Ram's "HAM CLOCK.docx" (2026-11-27). No setup steps yet, so no manual.
+  {
+    slug: "master-ham-clock",
+    kind: "Ham radio desk clock",
+    intro:
+      "A compact desk clock for amateur radio operators. Time, HF band conditions and live station activity on one bright colour screen.",
+    features: [
+      { icon: "Clock", title: "Clock display", text: "Shows UTC and local time." },
+      { icon: "Activity", title: "HF band propagation", text: "Live open and closed conditions for the HF bands, so you know which bands to try." },
+      { icon: "RadioTower", title: "Active stations", text: "Which stations are active on each band right now." },
+      { icon: "MapPin", title: "APRS stations", text: "Nearby APRS stations and their activity." },
+      { icon: "Sun", title: "Solar data", text: "Solar conditions that affect propagation." },
+    ],
+    highlights: [
+      { icon: "Monitor", title: "Colour screen", text: "Easy to read at a glance." },
+      { icon: "Usb", title: "USB-C power", text: "Any USB-C charger or computer port." },
+      { icon: "House", title: "Compact case", text: "Sits neatly on the shack desk." },
+      { icon: "Hash", title: "Personalised", text: "Shows your callsign on startup." },
+    ],
+    goodFor: [
+      { icon: "Radio", label: "Hams and DXers" },
+      { icon: "MapPin", label: "APRS users" },
+      { icon: "RadioTower", label: "Shortwave listeners" },
+      { icon: "Gift", label: "Gifts for radio fans" },
+    ],
   },
   // From Ram's posters (2026-11-17 12:40); setup Wi-Fi from tracker firmware v2.
   {
