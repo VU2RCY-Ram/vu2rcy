@@ -416,6 +416,26 @@ export const products: Product[] = [
       "Speed goes from 5 to 40 WPM and the tone from 400 to 1200 Hz, and the receiver follows the other station's tone across that range on its own. Transmission stops on its own after 2 minutes of continuous PTT. It runs on an internal rechargeable battery and charges from any 5 V USB-C charger.",
     ],
   },
+  // From Ram's photos and "HAM CLOCK.docx" (2026-11-27); no manual until he
+  // sends setup steps.
+  {
+    slug: "master-ham-clock",
+    name: "MASTER-HAM-CLOCK",
+    tagline:
+      "Desk clock for the shack: UTC and local time, HF band conditions and live station activity on one colour screen.",
+    image: "/catalogue/products/master-ham-clock.jpg",
+    isNew: true,
+    addedAt: "2026-11-27",
+    whatsapp: true,
+    userManual: "",
+    brochure: "/catalogue/products/brochures/master-ham-clock.pdf",
+    youtubeVideo: "",
+    content: [
+      "This is my MASTER-HAM-CLOCK, a compact desk clock for amateur radio operators. Next to UTC and local time, it shows which HF bands are open and which are closed, so you know which bands to try.",
+      "It also shows which stations are active on each band, nearby APRS stations and their activity, and the solar conditions that affect propagation. It all fits on one colour screen you can read at a glance.",
+      "It runs from any USB-C charger or a computer's USB port, sits in a compact black case on the desk, and shows your callsign when it starts up.",
+    ],
+  },
   // Cables: names from Ram's photo filenames (2026-11-24), no details yet.
   {
     slug: "aprs-cable",
