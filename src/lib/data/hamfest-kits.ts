@@ -6,8 +6,8 @@ export const hamfestKits = {
   event: "Hamfest India 2026",
   dates: "28-29 Nov 2026",
   venue: "NITK Surathkal, Mangaluru",
-  // Card hides after the last day, in India time.
-  endsAt: "2026-11-29T23:59:59+05:30",
+  // Card hides when the enquiry form closes (30 Nov, 11:59 PM India time).
+  endsAt: "2026-11-30T23:59:00+05:30",
   slugs: [
     "lora-chat",
     "master-aprs-weather-station",
@@ -20,6 +20,8 @@ export const hamfestKits = {
     "master-cw-link",
   ],
   cableSlugs: ["aprs-cable", "cw-cable", "sstv-cable"],
+  // If this link changes, regenerate public/hamfest/kit-enquiry-qr.svg to match.
+  enquiryFormUrl: "https://forms.gle/bdcSAzjePRDm3MVS8",
 }
 
 function bySlugs(slugs: string[]): Product[] {
